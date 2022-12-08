@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "strict": true,
+    "paths": {
+    },
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "mock/**/*",
+    "src/**/*",
+  ],
+  "exclude": [
+    "node_modules",
+    "lib",
+    "es",
+    "dist",
+    "typings",
+    "**/__test__",
+    "test",
+    "docs",
+    "tests"
+  ]
+}
