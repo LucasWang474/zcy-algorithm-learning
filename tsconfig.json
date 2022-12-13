@@ -11,14 +11,9 @@
     "sourceMap": true,
     "baseUrl": "./",
     "strict": true,
-    "paths": {
-    },
+    "paths": {},
     "allowSyntheticDefaultImports": true
   },
-  "include": [
-    "mock/**/*",
-    "src/**/*",
-  ],
   "exclude": [
     "node_modules",
     "lib",
