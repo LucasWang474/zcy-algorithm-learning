@@ -30,16 +30,20 @@ function arrEquals(arr1: any[], arr2: any[]): boolean {
   return true;
 }
 
-function test(times = 1000, len = 100) {
+function test(len = 100, times = 100000) {
   const label = `InsertionSort: times: ${times}, len: ${len}`;
   console.time(label);
   for (let i = 0; i < times; i++) {
-    const input = randomArr(len);
-    const expected = input.slice().sort((a, b) => a - b);
-    const actual = InsertionSort(input.slice());
+    const arr = randomArr(len);
+    const input1 = arr.slice();
+    const input2 = arr.slice();
+
+    const expected = input1.sort((a, b) => a - b);
+    const actual = InsertionSort(input2);
+
     if (!arrEquals(expected, actual)) {
       console.assert(false, {
-        input,
+        arr,
         expected,
         actual,
       });
@@ -49,6 +53,6 @@ function test(times = 1000, len = 100) {
   console.timeEnd(label);
 }
 
-const times = +process.argv[2] || 1000;
-const len = +process.argv[3] || 100;
-test(times, len);
+const len = +process.argv[2] || 100;
+const times = +process.argv[3] || 10000;
+test(len, times);
