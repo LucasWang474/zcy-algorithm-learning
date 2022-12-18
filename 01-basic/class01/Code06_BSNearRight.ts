@@ -7,10 +7,10 @@ function BinarySearch(arr: number[], target: number): number {
   while (L <= R) {
     M = L + ((R - L) >> 1);
     cur = arr[M];
-    if (cur < target) {
-      L = M + 1;
-    } else if (cur >= target) {
+    if (cur <= target) {
       res = M;
+      L = M + 1;
+    } else {
       R = M - 1;
     }
   }
@@ -18,9 +18,9 @@ function BinarySearch(arr: number[], target: number): number {
 }
 
 function bruteForce(arr: number[], target: number): number {
-  // 有序数组中找到 >=target 最左的位置，暴力解法
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] >= target) {
+  // 有序数组中找到 <= target 最右的位置，暴力解法
+  for (let i = arr.length - 1; i >= 0; i--) {
+    if (arr[i] <= target) {
       return i;
     }
   }

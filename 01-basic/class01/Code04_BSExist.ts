@@ -24,7 +24,7 @@ function randomArr(len = 100, maxNum = 1000000): number[] {
 }
 
 function test(len = 100, times = 100000, maxNum = 1000000) {
-  const label = `Binary Search: times: ${times}, len: ${len}`;
+  const label = `Binary Search: len: ${len}, times: ${times}, maxNum: ${maxNum}`;
   console.time(label);
   for (let i = 0; i < times; i++) {
     const arr = [...new Set(randomArr(len, maxNum))].sort((a, b) => a - b);
