@@ -10,10 +10,9 @@ function BubbleSort(arr: number[]): number[] {
 }
 
 function swap(arr: number[], i: number, j: number) {
-  let temp;
-  temp = arr[i];
-  arr[i] = arr[j];
-  arr[j] = temp;
+  arr[i] = arr[i] ^ arr[j];
+  arr[j] = arr[i] ^ arr[j];
+  arr[i] = arr[i] ^ arr[j];
 }
 
 function randomArr(len = 100, L = -1000, R = 1000): number[] {
