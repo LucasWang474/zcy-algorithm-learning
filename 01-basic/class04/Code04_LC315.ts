@@ -109,8 +109,7 @@ function test(times: number, length: number, maxNum: number) {
   console.time(label);
 
   for (let i = 0; i < times; i++) {
-    // const input = getRandomArray(length, maxNum);
-    const input = [5, 2, 6, 1];
+    const input = getRandomArray(length, maxNum);
     const expected = bf(input.slice());
     const actual = countSmaller(input.slice());
     if (!isSameArray(expected, actual)) {
