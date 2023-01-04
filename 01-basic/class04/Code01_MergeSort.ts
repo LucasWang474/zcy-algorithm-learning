@@ -53,7 +53,7 @@ function mergeSortRecur(nums: number[], aux: number[], L: number, R: number) {
 // -------------------- Merge sort END --------------------
 
 function getRandomArray(length: number, max: number) {
-  const nums = Array(length);
+  const nums = Array(~~(Math.random() * length));
   for (let i = 0; i < length; i++) {
     nums[i] = Math.floor(Math.random() * max - Math.random() * max);
   }
