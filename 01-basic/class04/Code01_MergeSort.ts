@@ -1,5 +1,3 @@
-import * as process from 'process';
-
 /**
  * https://leetcode.com/problems/sort-an-array/description/
  * @param nums
@@ -52,7 +50,6 @@ function mergeSortRecur(nums: number[], aux: number[], L: number, R: number) {
 
 function getRandomArray(length: number, max: number) {
   const nums = Array(length);
-  ç;
   for (let i = 0; i < length; i++) {
     nums[i] = Math.floor(Math.random() * max - Math.random() * max);
   }
