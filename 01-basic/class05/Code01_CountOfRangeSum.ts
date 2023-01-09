@@ -58,37 +58,45 @@ function randomArray(n: number, min: number, max: number): number[] {
   return arr;
 }
 
-function test(times: number, n: number, min: number, max: number) {
-  const label = `test ${times} times, n=${n}, min=${min}, max=${max}`;
-  console.time(label);
+function test() {
+  // Time test
+  let prevTotalTime = 0,
+    totalTime = 0;
+  const times = 1000;
+  for (let N = 10; N <= Number.MAX_VALUE; N *= 2) {
+    const min = -10000,
+      max = 10000;
+    const timeStart = Date.now();
 
-  for (let i = 0; i < times; i++) {
-    const arr = randomArray(n, min, max);
-    let lower = Math.floor(Math.random() * (max - min + 1)) + min;
-    let upper = Math.floor(Math.random() * (max - min + 1)) + min;
-    lower = Math.min(lower, upper);
-    upper = Math.max(lower, upper);
+    for (let i = 0; i < times; i++) {
+      const arr = randomArray(N, min, max);
+      let lower = Math.floor(Math.random() * (max - min + 1)) + min;
+      let upper = Math.floor(Math.random() * (max - min + 1)) + min;
+      lower = Math.min(lower, upper);
+      upper = Math.max(lower, upper);
 
-    const expected = bf(arr, lower, upper);
-    const actual = countRangeSum(arr, lower, upper);
-    if (expected !== actual) {
-      console.assert(false, {
-        arr,
-        lower,
-        upper,
-        expected,
-        actual,
-      });
-      return;
+      const expected = bf(arr, lower, upper);
+      const actual = countRangeSum(arr, lower, upper);
+      if (expected !== actual) {
+        console.assert(false, {
+          arr,
+          lower,
+          upper,
+          expected,
+          actual,
+        });
+        return;
+      }
     }
-  }
 
-  console.timeEnd(label);
+    const timeEnd = Date.now();
+    prevTotalTime = totalTime;
+    totalTime = timeEnd - timeStart;
+    console.log(`N: ${N}, time: ${totalTime}ms, prevTotalTime: ${prevTotalTime}ms`);
+    const ratio = totalTime / prevTotalTime;
+    const bigO = Math.log2(ratio);
+    console.log(`ratio: ${ratio}, bigO: ${bigO}`);
+  }
 }
 
-test(
-  +process.argv[2] || 100,
-  +process.argv[3] || 100,
-  +process.argv[4] || 0,
-  +process.argv[5] || 100,
-);
+test();
