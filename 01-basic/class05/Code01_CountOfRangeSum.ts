@@ -8,7 +8,6 @@
  * between indices i and j inclusive, where i <= j.
  */
 function countRangeSum(nums: number[], lower: number, upper: number): number {
-  // O(N2)
   const prevSums = getPrevSums(nums);
   const aux = new Array(nums.length);
   return processSums(prevSums, aux, 0, nums.length - 1, lower, upper);
