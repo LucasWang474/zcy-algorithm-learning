@@ -29,14 +29,10 @@ function merge(nums: number[], aux: number[], L: number, M: number, R: number) {
   let i = L,
     j = M + 1;
   for (let k = L; k <= R; k++) {
-    if (i > M) {
-      nums[k] = aux[j++];
-    } else if (j > R) {
+    if (j > R || (i <= M && aux[i] <= aux[j])) {
       nums[k] = aux[i++];
-    } else if (aux[j] < aux[i]) {
-      nums[k] = aux[j++];
     } else {
-      nums[k] = aux[i++];
+      nums[k] = aux[j++];
     }
   }
 }
