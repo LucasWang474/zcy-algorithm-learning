@@ -13,6 +13,23 @@ function countRangeSum(nums: number[], lower: number, upper: number): number {
   return processSums(prevSums, aux, 0, nums.length - 1, lower, upper);
 }
 
+/**
+ * 假设数组的范围是 [0, ..., N - 1]，已知 lower upper，求有多少个区间 [i, j] 满足：
+ * 1. i <= j
+ * 2. sum(i, j) >= lower && sum(i, j) <= upper
+ * 3. sum(i, j) = sum(0, j) - sum(0, i - 1)
+ *
+ * 注意到一个细节：sum(i, j) = sum(0, j) - sum(0, i - 1)
+ * 转换一下：sum(0, j) = sum(0, i - 1) + sum(i, j)
+ *
+ * 考虑一个子问题，假设数组长度为 j + 1，求有多少以 j 结尾的区间 [i, j] 满足：
+ * sum(i, j) >= lower && sum(i, j) <= upper
+ * 或者说，求有多少个 i 满足：
+ * sum(0, j) - sum(0, i - 1) >= lower && sum(0, j) - sum(0, i - 1) <= upper
+ * 这样我们就求出了 0-j 范围内，以 j 结尾的区间 [i, j] 符合条件的个数
+ *
+ * // 当然上面的 0 可以设置为任意值，只要不比 j 大就行
+ */
 function processSums(
   prevSums: number[],
   aux: number[],
@@ -45,6 +62,8 @@ function merge(
     aux[i] = prevSums[i];
   }
 
+  // 这个算法快的核心点：windowL 和 windowR 是不会退的，只会向右移动
+  // 所以我们只需要 O(N) 的时间复杂度就可以求出以 j 结尾的区间 [i, j] 符合条件的个数
   let windowL = lo,
     windowR = lo;
   let count = 0;
