@@ -10,9 +10,9 @@ function sort(nums: number[], lo: number, hi: number) {
   if (lo >= hi) return;
 
   const pivot = nums[Math.trunc(Math.random() * (hi - lo + 1) + lo)];
-  const [L, R] = partition(nums, pivot, lo, hi);
-  sort(nums, lo, L - 1);
-  sort(nums, R + 1, hi);
+  const [lt, gt] = partition(nums, pivot, lo, hi);
+  sort(nums, lo, lt);
+  sort(nums, gt, hi);
 }
 
 function partition(nums: number[], pivot: number, lo: number, hi: number) {
@@ -37,5 +37,5 @@ function partition(nums: number[], pivot: number, lo: number, hi: number) {
     }
   }
 
-  return [lt + 1, gt - 1];
+  return [lt, gt];
 }

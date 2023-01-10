@@ -27,5 +27,5 @@ function partition(nums: number[], pivot: number, lo: number, hi: number) {
     }
   }
 
-  return [lt + 1, gt - 1];
+  return [lt, gt];
 }
