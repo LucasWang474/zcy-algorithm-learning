@@ -10,7 +10,16 @@
 function countRangeSum(nums: number[], lower: number, upper: number): number {
   const prevSums = getPrevSums(nums);
   const aux = new Array(nums.length);
-  return processSums(prevSums, aux, 0, nums.length - 1, lower, upper);
+
+  // lower, upper
+  // prefixSums[i] = rangeSum(0, j) + rangeSum(j + 1, i)
+  // =  prefixSum[j] + rangeSum(j + 1, i)
+
+  // In short: prefixSums[i] = prefixSum[j] + rangeSum(j + 1, i)
+  // rangeSum(j + 1, i) in [lower, upper]
+  // prefixSum[j] in [prefixSum[i] - upper, prefixSum[i] - lower]
+
+  return processSums(prevSums, aux, 0, prevSums.length - 1, lower, upper);
 }
 
 /**
@@ -76,6 +85,7 @@ function merge(
     while (windowR <= mid && aux[windowR] <= max) {
       windowR++;
     }
+    // [windowL, windowR)
     count += windowR - windowL;
   }
 
