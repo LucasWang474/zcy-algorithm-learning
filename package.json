@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/LucasWang474/algorithm-learning#readme",
   "devDependencies": {
-    "@types/node": "^18.11.17"
+    "@types/node": "^18.11.17",
+    "prettier": "^2.8.7"
   }
 }
