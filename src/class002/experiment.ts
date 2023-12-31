@@ -28,9 +28,9 @@ function experiment(size: number, times: number) {
       if (!hasMoneyArray[i]) continue;
 
       let other = i;
-      do {
+      while (other === i) {
         other = Math.trunc(Math.random() * size);
-      } while (other === i);
+      }
 
       wealthArray[i]--;
       wealthArray[other]++;
