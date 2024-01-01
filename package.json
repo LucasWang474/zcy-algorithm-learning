@@ -18,6 +18,9 @@
   "homepage": "https://github.com/LucasWang474/algorithm-learning#readme",
   "devDependencies": {
     "@types/node": "^18.11.17",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
+    "eslint": "^8.56.0",
     "prettier": "^2.8.8"
   }
 }
