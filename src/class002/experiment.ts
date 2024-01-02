@@ -14,12 +14,9 @@ const INITIAL_WEALTH_PER_PERSON = 100;
 
 function experiment(size: number, times: number) {
   const wealthArray: number[] = new Array(size).fill(INITIAL_WEALTH_PER_PERSON);
-  const hasMoneyArray: boolean[] = new Array(size);
+  const hasMoneyArray: boolean[] = new Array(size).fill(false);
 
   while (times--) {
-    // Suppose every one does not have money in the beginning
-    hasMoneyArray.fill(false);
-
     for (let i = 0; i < size; i++) {
       hasMoneyArray[i] = wealthArray[i] > 0;
     }
@@ -37,7 +34,7 @@ function experiment(size: number, times: number) {
     }
   }
 
-  wealthArray.sort();
+  wealthArray.sort((a, b) => a - b);
 
   let str = '';
   for (let i = 0; i < size; i++) {
