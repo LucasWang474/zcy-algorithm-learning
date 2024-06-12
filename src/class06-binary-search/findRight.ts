@@ -1,12 +1,12 @@
 /**
- * Find the leftmost number which is greater than or equals to the target.
+ * Find the rightmost number which is less than or equals to the target.
  */
 import { getRandomArrays } from '@/utils/random';
 import { sortNumsArrayInPlace } from '@/utils/array';
 
 function bf(nums: number[], target: number) {
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i] >= target) {
+  for (let i = nums.length - 1; i >= 0; i--) {
+    if (nums[i] <= target) {
       return i;
     }
   }
@@ -14,7 +14,7 @@ function bf(nums: number[], target: number) {
   return -1;
 }
 
-function findLeft(nums: number[], target: number) {
+function findRight(nums: number[], target: number) {
   let L = 0,
     R = nums.length - 1,
     M: number,
@@ -24,11 +24,11 @@ function findLeft(nums: number[], target: number) {
     M = L + ((R - L) >>> 1);
     cur = nums[M];
 
-    if (cur >= target) {
+    if (cur <= target) {
       res = M;
-      R = M - 1;
-    } else {
       L = M + 1;
+    } else {
+      R = M - 1;
     }
   }
 
@@ -43,7 +43,7 @@ function validator() {
     const target = Math.trunc(Math.random() * 100);
     const nums = sortNumsArrayInPlace(getRandomArrays(arrSize));
     const expected = bf(nums.slice(), target);
-    const actual = findLeft(nums.slice(), target);
+    const actual = findRight(nums.slice(), target);
     if (expected !== actual) {
       console.error(nums, expected, actual);
       return;
