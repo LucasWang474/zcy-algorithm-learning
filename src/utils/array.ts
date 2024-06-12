@@ -15,3 +15,7 @@ export function isEqualArray<T>(arr1: T[], arr2: T[]) {
 
   return true;
 }
+
+export function sortNumsArrayInPlace(arr: number[]) {
+  return arr.sort((a, b) => a - b);
+}
