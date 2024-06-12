@@ -3,6 +3,7 @@
  */
 import { getRandomArrays } from '@/utils/random';
 import { sortNumsArrayInPlace } from '@/utils/array';
+import * as process from 'node:process';
 
 function bf(nums: number[], target: number) {
   for (let i = 0; i < nums.length; i++) {
@@ -35,8 +36,7 @@ function findLeft(nums: number[], target: number) {
   return res;
 }
 
-function validator() {
-  const times = 1000;
+function validator(times = 100) {
   const arrSize = 1000;
 
   for (let i = 0; i < times; i++) {
@@ -52,4 +52,4 @@ function validator() {
   console.log('All passed');
 }
 
-validator();
+validator(+process.argv[2]);

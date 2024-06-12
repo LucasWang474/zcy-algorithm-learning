@@ -5,3 +5,7 @@ export function getRandomArrays(size = 100) {
   }
   return res;
 }
+
+export function getRandomInteger(maxNum = 100) {
+  return Math.trunc(Math.random() * maxNum);
+}
