@@ -1,3 +1,5 @@
+import { MyListNode } from './linked-list';
+
 export function getRandomArrays(size = 100) {
   const res = new Array(size);
   for (let i = 0; i < res.length; i++) {
@@ -8,4 +10,14 @@ export function getRandomArrays(size = 100) {
 
 export function getRandomInteger(maxNum = 100) {
   return Math.trunc(Math.random() * maxNum);
+}
+
+export function getRandomLinkedList(length = 10) {
+  const dummy = new MyListNode<number>(Math.trunc(Math.random() * 100));
+  let ptr = dummy;
+  for (let i = 0; i < length - 1; i++) {
+    ptr.next = new MyListNode<number>(Math.trunc(Math.random() * 100));
+    ptr = ptr.next;
+  }
+  return dummy;
 }

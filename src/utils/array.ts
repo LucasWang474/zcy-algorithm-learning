@@ -7,6 +7,8 @@ export function swap<T>(arr: T[], i: number, j: number) {
 }
 
 export function isEqualArray<T>(arr1: T[], arr2: T[]) {
+  if (arr1 === arr2) return true;
+
   if (arr1.length !== arr2.length) return false;
 
   for (let i = 0; i < arr1.length; i++) {
