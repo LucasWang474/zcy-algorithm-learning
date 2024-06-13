@@ -26,5 +26,5 @@ function preorderTraversalRecur(root: TreeNode | null): number[] {
   if (!root) return [];
 
   // root -> left -> right
-  return [root.val, ...preorderTraversal(root.left), ...preorderTraversal(root.right)];
+  return [root.val, ...preorderTraversalRecur(root.left), ...preorderTraversalRecur(root.right)];
 }
