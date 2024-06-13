@@ -1,7 +1,7 @@
 import { MyListNode } from './linked-list';
 
 export function getRandomArray(size = 100) {
-  const res = new Array(size);
+  const res: number[] = new Array(size);
   for (let i = 0; i < res.length; i++) {
     res[i] = Math.trunc((Math.random() - Math.random()) * 100);
   }

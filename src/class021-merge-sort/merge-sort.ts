@@ -2,10 +2,10 @@ import { getRandomArray } from '@/utils/random';
 import { isEqualArray } from '@/utils/array';
 import * as process from 'node:process';
 
-let aux: number[] = [];
+let help: number[] = [];
 
 function mergeSort(arr: number[]) {
-  aux = new Array(arr.length);
+  help = new Array(arr.length);
   mergeSortRecur(arr, 0, arr.length - 1);
   return arr;
 }
@@ -20,7 +20,7 @@ function mergeSortRecur(arr: number[], L: number, R: number) {
 }
 
 function mergeSortIter(arr: number[]) {
-  aux = new Array(arr.length);
+  help = new Array(arr.length);
 
   for (let step = 1; step < arr.length; step *= 2) {
     let L = 0,
@@ -46,16 +46,16 @@ function merge(arr: number[], L: number, M: number, R: number) {
     lo = L,
     hi = M + 1;
   while (lo <= M && hi <= R) {
-    aux[i++] = arr[lo] <= arr[hi] ? arr[lo++] : arr[hi++];
+    help[i++] = arr[lo] <= arr[hi] ? arr[lo++] : arr[hi++];
   }
   while (lo <= M) {
-    aux[i++] = arr[lo++];
+    help[i++] = arr[lo++];
   }
   while (hi <= R) {
-    aux[i++] = arr[hi++];
+    help[i++] = arr[hi++];
   }
   for (let j = L; j <= R; j++) {
-    arr[j] = aux[j];
+    arr[j] = help[j];
   }
 }
 
