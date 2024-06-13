@@ -5,7 +5,7 @@ import * as process from 'node:process';
 let aux: number[] = [];
 
 function mergeSort(arr: number[]) {
-  aux = new Array(arr.length).fill(0);
+  aux = new Array(arr.length);
   mergeSortRecur(arr, 0, arr.length - 1);
   return arr;
 }
@@ -17,6 +17,26 @@ function mergeSortRecur(arr: number[], L: number, R: number) {
   mergeSortRecur(arr, L, M);
   mergeSortRecur(arr, M + 1, R);
   merge(arr, L, M, R);
+}
+
+function mergeSortIter(arr: number[]) {
+  aux = new Array(arr.length);
+
+  for (let step = 1; step < arr.length; step *= 2) {
+    let L = 0,
+      M,
+      R;
+    while (L + step < arr.length) {
+      M = L + step - 1;
+      R = Math.min(arr.length - 1, L + step * 2 - 1);
+
+      merge(arr, L, M, R);
+
+      L = R + 1;
+    }
+  }
+
+  return arr;
 }
 
 function merge(arr: number[], L: number, M: number, R: number) {
@@ -43,7 +63,7 @@ function validator(times = 100) {
   for (let i = 0; i < times; i++) {
     const inputArr = getRandomArray(100);
     const expected = inputArr.slice().sort((a, b) => a - b);
-    const actual = mergeSort(inputArr.slice());
+    const actual = mergeSortIter(inputArr.slice());
     if (!isEqualArray(expected, actual)) {
       console.error(expected, actual);
       return;
