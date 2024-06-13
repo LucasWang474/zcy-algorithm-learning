@@ -1,5 +1,5 @@
 import * as process from 'process';
-import { getRandomArrays } from '@/utils/random';
+import { getRandomArray } from '@/utils/random';
 import { isEqualArray, swap } from '@/utils/array';
 
 function bubbleSort(arr: number[]) {
@@ -37,7 +37,7 @@ function selectionSort(arr: number[]) {
 }
 
 function main(method: string) {
-  const arr = getRandomArrays();
+  const arr = getRandomArray();
   const expected = [...arr].sort((a, b) => a - b);
   const actual = [...arr];
 

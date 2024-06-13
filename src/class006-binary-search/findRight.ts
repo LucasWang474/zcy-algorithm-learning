@@ -1,7 +1,7 @@
 /**
  * Find the rightmost number which is less than or equals to the target.
  */
-import { getRandomArrays } from '@/utils/random';
+import { getRandomArray } from '@/utils/random';
 import { sortNumsArrayInPlace } from '@/utils/array';
 
 function bf(nums: number[], target: number) {
@@ -41,7 +41,7 @@ function validator() {
 
   for (let i = 0; i < times; i++) {
     const target = Math.trunc(Math.random() * 100);
-    const nums = sortNumsArrayInPlace(getRandomArrays(arrSize));
+    const nums = sortNumsArrayInPlace(getRandomArray(arrSize));
     const expected = bf(nums.slice(), target);
     const actual = findRight(nums.slice(), target);
     if (expected !== actual) {

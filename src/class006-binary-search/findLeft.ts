@@ -1,7 +1,7 @@
 /**
  * Find the leftmost number which is greater than or equals to the target.
  */
-import { getRandomArrays } from '@/utils/random';
+import { getRandomArray } from '@/utils/random';
 import { sortNumsArrayInPlace } from '@/utils/array';
 import * as process from 'node:process';
 
@@ -41,7 +41,7 @@ function validator(times = 100) {
 
   for (let i = 0; i < times; i++) {
     const target = Math.trunc(Math.random() * 100);
-    const nums = sortNumsArrayInPlace(getRandomArrays(arrSize));
+    const nums = sortNumsArrayInPlace(getRandomArray(arrSize));
     const expected = bf(nums.slice(), target);
     const actual = findLeft(nums.slice(), target);
     if (expected !== actual) {
