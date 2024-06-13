@@ -27,14 +27,23 @@ function merge(arr: number[], L: number, M: number, R: number): number {
   let res = 0;
 
   // Compute small sum when merging
-  for (let i = L, j = M + 1; j <= R; j++) {
-    while (i <= M && arr[i] <= arr[j] * 2) {
-      i++;
+  // for (let i = L, j = M + 1; j <= R; j++) {
+  //   while (i <= M && arr[i] <= arr[j] * 2) {
+  //     i++;
+  //   }
+  //
+  //   if (i > M) break;
+  //
+  //   res += M - i + 1;
+  // }
+
+  // Another method
+  for (let i = L, j = M + 1; i <= M; i++) {
+    while (j <= R && arr[i] > arr[j] * 2) {
+      j++;
     }
 
-    if (i > M) break;
-
-    res += M - i + 1;
+    res += j - (M + 1);
   }
 
   // Normal merge
