@@ -10,13 +10,13 @@ export class MyHeap<T> {
   heapify(arr: T[], i: number, heapSize: number) {
     let L = i * 2 + 1;
     while (L < heapSize) {
-      let smaller = L + 1 < heapSize && this.comparator(arr[L + 1], arr[L]) > 0 ? L + 1 : L;
-      smaller = this.comparator(arr[smaller], arr[i]) > 0 ? smaller : i;
+      let larger = L + 1 < heapSize && this.comparator(arr[L + 1], arr[L]) > 0 ? L + 1 : L;
+      larger = this.comparator(arr[larger], arr[i]) > 0 ? larger : i;
 
-      if (smaller === i) return;
+      if (larger === i) return;
 
-      swap(arr, smaller, i);
-      i = smaller;
+      swap(arr, larger, i);
+      i = larger;
       L = i * 2 + 1;
     }
   }
