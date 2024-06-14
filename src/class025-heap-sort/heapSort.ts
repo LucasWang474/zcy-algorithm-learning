@@ -27,25 +27,22 @@ function heapSort(arr: number[]) {
 }
 
 function heapInsert(arr: number[], i: number) {
-  let parent = Math.trunc((i - 1) / 2);
-  while (parent >= 0 && arr[i] > arr[parent]) {
-    swap(arr, i, parent);
-
-    i = parent;
-    parent = Math.trunc((i - 1) / 2);
+  while (arr[i] > arr[~~((i - 1) / 2)]) {
+    swap(arr, i, ~~((i - 1) / 2));
+    i = ~~((i - 1) / 2);
   }
 }
 
 function heapify(arr: number[], i: number, heapSize: number) {
   let L = i * 2 + 1;
   while (L < heapSize) {
-    const larger = L + 1 < heapSize && arr[L + 1] > arr[L] ? L + 1 : L;
-    const newI = arr[larger] > arr[i] ? larger : i;
+    let larger = L + 1 < heapSize && arr[L + 1] > arr[L] ? L + 1 : L;
+    larger = arr[larger] > arr[i] ? larger : i;
 
-    if (newI === i) return;
+    if (larger === i) return;
 
-    swap(arr, newI, i);
-    i = newI;
+    swap(arr, larger, i);
+    i = larger;
     L = i * 2 + 1;
   }
 }
