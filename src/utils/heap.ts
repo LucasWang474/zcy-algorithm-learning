@@ -10,19 +10,19 @@ export class MyHeap<T> {
   heapify(arr: T[], i: number, heapSize: number) {
     let L = i * 2 + 1;
     while (L < heapSize) {
-      let larger = L + 1 < heapSize && this.comparator(arr[L + 1], arr[L]) > 0 ? L + 1 : L;
-      larger = this.comparator(arr[larger], arr[i]) > 0 ? larger : i;
+      let smaller = L + 1 < heapSize && this.comparator(arr[L + 1], arr[L]) < 0 ? L + 1 : L;
+      smaller = this.comparator(arr[smaller], arr[i]) < 0 ? smaller : i;
 
-      if (larger === i) return;
+      if (smaller === i) return;
 
-      swap(arr, larger, i);
-      i = larger;
+      swap(arr, smaller, i);
+      i = smaller;
       L = i * 2 + 1;
     }
   }
 
   heapInsert(arr: T[], i: number) {
-    while (this.comparator(arr[i], arr[~~((i - 1) / 2)]) > 0) {
+    while (this.comparator(arr[i], arr[~~((i - 1) / 2)]) < 0) {
       swap(arr, i, ~~((i - 1) / 2));
       i = ~~((i - 1) / 2);
     }
@@ -38,9 +38,9 @@ export class MyHeap<T> {
     return this.data[0];
   }
 
-  pop() {
+  pop(): T {
     swap(this.data, 0, this.size - 1);
-    const res = this.data.pop();
+    const res = this.data.pop() as T;
     this.heapify(this.data, 0, --this.size);
     return res;
   }

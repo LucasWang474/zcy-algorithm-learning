@@ -24,7 +24,7 @@ function heapSort(arr: number[]) {
   //   heapify(arr, 0, --size);
   // }
 
-  const maxHeap = new MyHeap((a: number, b: number) => b - a);
+  const maxHeap = new MyHeap((a: number, b: number) => a - b);
   for (let i = 0; i < arr.length; i++) {
     maxHeap.add(arr[i]);
   }
