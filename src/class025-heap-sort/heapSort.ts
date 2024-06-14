@@ -1,29 +1,40 @@
 import { getRandomArray } from '@/utils/random';
 import { isEqualArray, swap } from '@/utils/array';
 import process from 'node:process';
+import { MyHeap } from '@/utils/heap';
 
 function heapSort(arr: number[]) {
   // Step 1: build the heap
 
-  if (Math.random() > 0.5) {
-    // Solution 1: top to bottom
-    for (let i = 0; i < arr.length; i++) {
-      heapInsert(arr, i);
-    }
-  } else {
-    // Solution 2: bottom to top
-    for (let i = arr.length - 1; i >= 0; i--) {
-      heapify(arr, i, arr.length);
-    }
+  // if (Math.random() > 0.5) {
+  //   // Solution 1: top to bottom
+  //   for (let i = 0; i < arr.length; i++) {
+  //     heapInsert(arr, i);
+  //   }
+  // } else {
+  //   // Solution 2: bottom to top
+  //   for (let i = arr.length - 1; i >= 0; i--) {
+  //     heapify(arr, i, arr.length);
+  //   }
+  // }
+  //
+  // let size = arr.length;
+  // while (size > 0) {
+  //   swap(arr, 0, size - 1);
+  //   heapify(arr, 0, --size);
+  // }
+
+  const maxHeap = new MyHeap((a: number, b: number) => b - a);
+  for (let i = 0; i < arr.length; i++) {
+    maxHeap.add(arr[i]);
   }
 
-  let size = arr.length;
-  while (size > 0) {
-    swap(arr, 0, size - 1);
-    heapify(arr, 0, --size);
+  const res = [];
+  while (maxHeap.size) {
+    res.push(maxHeap.pop());
   }
 
-  return arr;
+  return res;
 }
 
 function heapInsert(arr: number[], i: number) {
