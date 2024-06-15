@@ -1,7 +1,7 @@
 export class MyHeap<T> {
   public size: number = 0;
-  public data: T[] = [];
-  private readonly comparator: (a: T, b: T) => number;
+  public readonly data: T[] = [];
+  public readonly comparator: (a: T, b: T) => number;
 
   constructor(comparator: (a: T, b: T) => number) {
     this.comparator = comparator;
@@ -43,6 +43,10 @@ export class MyHeap<T> {
     const res = this.data.pop() as T;
     this.heapify(this.data, 0, --this.size);
     return res;
+  }
+
+  isEmpty() {
+    return this.size === 0;
   }
 }
 
