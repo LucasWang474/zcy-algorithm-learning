@@ -1,9 +1,14 @@
 import { MyListNode } from './linked-list';
 
-export function getRandomArray(size = 100) {
+export function getRandomArray(
+  size = 100,
+  opts?: {
+    nonNegative?: boolean;
+  },
+) {
   const res: number[] = new Array(size);
   for (let i = 0; i < res.length; i++) {
-    res[i] = Math.trunc((Math.random() - Math.random()) * 100);
+    res[i] = Math.trunc((opts?.nonNegative ? Math.random() : Math.random() - Math.random()) * 100);
   }
   return res;
 }
