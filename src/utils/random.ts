@@ -13,8 +13,13 @@ export function getRandomArray(
   return res;
 }
 
-export function getRandomInteger(maxNum = 100) {
-  return Math.trunc(Math.random() * maxNum);
+export function getRandomInteger(
+  maxNum = 100,
+  opts?: {
+    nonNegative?: boolean;
+  },
+) {
+  return Math.trunc((opts?.nonNegative ? Math.random() : Math.random() - Math.random()) * maxNum);
 }
 
 export function getRandomLinkedList(length = 10) {
