@@ -6,17 +6,17 @@ class RandomizedCollection {
   constructor() {}
 
   insert(val: number): boolean {
-    let res;
+    let doesNotHave;
 
     this.arr.push(val);
     if (this.valueToIndexMap.has(val)) {
       this.valueToIndexMap.get(val)?.add(this.arr.length - 1);
-      res = false;
+      doesNotHave = false;
     } else {
       this.valueToIndexMap.set(val, new Set([this.arr.length - 1]));
-      res = true;
+      doesNotHave = true;
     }
-    return res;
+    return doesNotHave;
   }
 
   remove(val: number): boolean {
