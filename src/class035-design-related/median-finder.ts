@@ -5,12 +5,7 @@ class MedianFinder {
   constructor() {}
 
   addNum(num: number): void {
-    if (this.minHeap.isEmpty() && this.maxHeap.isEmpty()) {
-      this.maxHeap.add(num);
-      return;
-    }
-
-    if (num <= this.maxHeap.peek()) {
+    if (this.maxHeap.isEmpty() || num <= this.maxHeap.peek()) {
       this.maxHeap.add(num);
     } else {
       this.minHeap.add(num);
