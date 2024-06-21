@@ -22,6 +22,10 @@ class FreqStack {
   pop(): number {
     const res = this.stack[this.maxFreq - 1].pop() as number;
     this.valToFrequencyMap.set(res, (this.valToFrequencyMap.get(res) as number) - 1);
+    if (!this.valToFrequencyMap.get(res)) {
+      this.valToFrequencyMap.delete(res);
+    }
+
     if (!this.stack[this.maxFreq - 1].length) {
       this.maxFreq--;
       this.stack.pop();
