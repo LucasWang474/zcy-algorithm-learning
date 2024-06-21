@@ -1,3 +1,4 @@
+// https://leetcode.com/problems/find-median-from-data-stream/description/
 class MedianFinder {
   maxHeap = new MyHeap<number>((a, b) => b - a); // small values
   minHeap = new MyHeap<number>((a, b) => a - b); // larger values
