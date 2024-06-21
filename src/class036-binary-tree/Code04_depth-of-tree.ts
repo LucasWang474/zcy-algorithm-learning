@@ -39,3 +39,45 @@ function maxDepthIter(root: TreeNode | null): number {
 
   return depth;
 }
+
+// https://leetcode.com/problems/minimum-depth-of-binary-tree/
+function minDepthRecur(root: TreeNode | null): number {
+  if (!root) return 0;
+
+  const leftDepth = minDepthRecur(root.left);
+  const rightDepth = minDepthRecur(root.right);
+
+  if (!leftDepth || !rightDepth) {
+    return 1 + Math.max(leftDepth, rightDepth);
+  }
+
+  return 1 + Math.min(leftDepth, rightDepth);
+}
+
+// https://leetcode.com/problems/minimum-depth-of-binary-tree/
+function minDepthIter(root: TreeNode | null): number {
+  if (!root) return 0;
+
+  let depth = 0;
+  let min = Number.MAX_VALUE;
+  let curLevel = [root];
+
+  while (curLevel.length) {
+    depth++;
+
+    const nextLevel = [];
+
+    for (const node of curLevel) {
+      if (node.left) nextLevel.push(node.left);
+      if (node.right) nextLevel.push(node.right);
+
+      if (!node.left && !node.right) {
+        min = Math.min(min, depth);
+      }
+    }
+
+    curLevel = nextLevel;
+  }
+
+  return min;
+}
