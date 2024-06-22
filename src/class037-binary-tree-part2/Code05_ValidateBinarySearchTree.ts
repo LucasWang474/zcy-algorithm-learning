@@ -13,11 +13,12 @@ class TreeNode {
 }
 
 function isValidBST(root: TreeNode | null): boolean {
-  return isValidBSTRecur(root, -Infinity, Infinity);
+  return isValidBSTRecur(root);
 }
 
-function isValidBSTRecur(root: TreeNode | null, lower: number, upper: number): boolean {
+function isValidBSTRecur(root: TreeNode | null, lower = -Infinity, upper = Infinity): boolean {
   if (!root) return true;
+
   if (root.val <= lower || root.val >= upper) return false;
   if (!root.left && !root.right) return true;
 
