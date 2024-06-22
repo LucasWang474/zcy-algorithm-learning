@@ -12,6 +12,7 @@ class TreeNode {
   }
 }
 
+// BST
 function lowestCommonAncestor(
   root: TreeNode | null,
   p: TreeNode | null,
@@ -26,5 +27,30 @@ function lowestCommonAncestor(
     root = root.val < p.val ? root.right : root.left;
   }
 
+  return root;
+}
+
+// BST
+function lowestCommonAncestor(
+  root: TreeNode | null,
+  p: TreeNode | null,
+  q: TreeNode | null,
+): TreeNode | null {
+  if (!root || !p || !q) return null;
+
+  // Make p less than q
+  [p, q] = [p.val < q.val ? p : q, p.val < q.val ? q : p];
+  return lowestCommonAncestorRecur(root, p, q);
+}
+
+function lowestCommonAncestorRecur(
+  root: TreeNode | null,
+  p: TreeNode,
+  q: TreeNode,
+): TreeNode | null {
+  if (!root) return null;
+
+  if (root.val < p.val) return lowestCommonAncestor(root.right, p, q);
+  if (root.val > q.val) return lowestCommonAncestor(root.left, p, q);
   return root;
 }
