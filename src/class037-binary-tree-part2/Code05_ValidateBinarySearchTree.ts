@@ -13,7 +13,7 @@ class TreeNode {
 }
 
 function isValidBST(root: TreeNode | null): boolean {
-  return isValidBSTRecur(root);
+  return isValidBSTIter(root);
 }
 
 function isValidBSTRecur(root: TreeNode | null, lower = -Infinity, upper = Infinity): boolean {
@@ -28,4 +28,26 @@ function isValidBSTRecur(root: TreeNode | null, lower = -Infinity, upper = Infin
   return (
     isValidBSTRecur(root.left, lower, root.val) && isValidBSTRecur(root.right, root.val, upper)
   );
+}
+
+function isValidBSTIter(root: TreeNode | null): boolean {
+  if (!root) return true;
+
+  let pre;
+  const stack = [];
+  let head: TreeNode | null = root;
+
+  while (stack.length || head) {
+    if (head) {
+      stack.push(head);
+      head = head.left;
+    } else {
+      head = stack.pop() as TreeNode;
+      if (pre && head.val <= pre.val) return false;
+      pre = head;
+      head = head.right;
+    }
+  }
+
+  return true;
 }

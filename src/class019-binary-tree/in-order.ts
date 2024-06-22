@@ -1,5 +1,6 @@
 import { TreeNode } from '@/utils/linked-list';
 
+// This one is better
 function inorderTraversal(root: TreeNode | null): number[] {
   if (!root) return [];
 
