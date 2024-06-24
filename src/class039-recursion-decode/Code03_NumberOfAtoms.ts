@@ -4,10 +4,10 @@ function countOfAtoms(formula: string): string {
   const map = new Map<string, number>();
   countOfAtomsRecur(formula, { i: 0 }, map);
 
-  return [...map.keys()]
+  return [...map.entries()]
     .sort()
-    .map((key) => {
-      return key + map.get(key);
+    .map(([key, val]) => {
+      return key + (val === 1 ? '' : String(val));
     })
     .join('');
 }
@@ -15,31 +15,37 @@ function countOfAtoms(formula: string): string {
 function countOfAtomsRecur(formula: string, info: { i: number }, map: Map<string, number>) {
   if (info.i >= formula.length) return;
 
-  const curMap = new Map<string, number>();
-
+  let mapForRecur: Map<string, number> | undefined;
   let curEle = '';
-  let times = 0;
+  let times: undefined | number = undefined;
+
+  function updateMap() {
+    if (curEle) {
+      map.set(curEle, (map.get(curEle) || 0) + (times || 1));
+    } else if (mapForRecur) {
+      for (const [key, value] of mapForRecur) {
+        map.set(key, (map.get(key) || 0) + value * (times || 1));
+      }
+    }
+		
+    mapForRecur = undefined;
+    curEle = '';
+    times = undefined;
+  }
+
   while (info.i < formula.length) {
     const char = formula[info.i++];
 
     if (char >= '0' && char <= '9') {
-      times = times * 10 + Number(char);
+      times = times === undefined ? Number(char) : times * 10 + Number(char);
       continue;
     }
 
     if (char === '(') {
-      if (times && curEle) {
-        curMap.set(curEle, (curMap.get(curEle) || 0) + times);
-        times = 0;
-        curEle = '';
-      }
+      updateMap();
 
-      const nextMap = new Map<string, number>();
-      countOfAtomsRecur(formula, info, nextMap);
-      updateMap({
-        fromMap: nextMap,
-        toMap: curMap,
-      });
+      mapForRecur = new Map<string, number>();
+      countOfAtomsRecur(formula, info, mapForRecur);
       continue;
     }
 
@@ -47,30 +53,14 @@ function countOfAtomsRecur(formula: string, info: { i: number }, map: Map<string
       break;
     }
 
-    if (times && curEle) {
-      curMap.set(curEle, (curMap.get(curEle) || 0) + times);
-      times = 0;
-      curEle = '';
+    if (char.toUpperCase() === char) {
+      updateMap();
     }
 
     curEle += char;
   }
 
-  if (times && curEle) {
-    curMap.set(curEle, (curMap.get(curEle) || 0) + times);
-  }
-
-  updateMap({
-    fromMap: curMap,
-    toMap: map,
-  });
-}
-
-function updateMap(params: { fromMap: Map<string, number>; toMap: Map<string, number> }) {
-  const { fromMap, toMap } = params;
-  for (const [key, value] of fromMap) {
-    toMap.set(key, (toMap.get(key) || 0) + value);
-  }
+  updateMap();
 }
 
 function validator() {
@@ -83,6 +73,26 @@ function validator() {
     console.error(`Expected: ${expected}, actual: ${actual}, input: ${input}`);
     return;
   }
+
+  // Test 2
+  input = 'Mg(OH)2';
+  expected = 'H2MgO2';
+  actual = countOfAtoms(input);
+  if (expected !== actual) {
+    console.error(`Expected: ${expected}, actual: ${actual}, input: ${input}`);
+    return;
+  }
+
+  // Test 3
+  input = 'K4(ON(SO3)2)2';
+  expected = 'K4N2O14S4';
+  actual = countOfAtoms(input);
+  if (expected !== actual) {
+    console.error(`Expected: ${expected}, actual: ${actual}, input: ${input}`);
+    return;
+  }
+
+  console.log('All test cases passed');
 }
 
 validator();
