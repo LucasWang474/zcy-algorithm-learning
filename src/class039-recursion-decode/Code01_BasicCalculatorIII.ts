@@ -8,25 +8,36 @@ function evalHelper(expr: string, info: { i: number }): number {
     operators: string[] = [];
 
   let curOperand = 0;
+  let prevChar = undefined,
+    curChar = undefined;
   while (info.i < expr.length) {
-    const char = expr[info.i];
+    prevChar = curChar;
+    curChar = expr[info.i];
     info.i++;
 
-    if (char >= '0' && char <= '9') {
-      curOperand = curOperand * 10 + Number(char);
+    if (curChar >= '0' && curChar <= '9') {
+      curOperand = curOperand * 10 + Number(curChar);
       continue;
     }
 
-    if (char === '(') {
+    if (curChar === '(') {
       curOperand = evalHelper(expr, info);
       continue;
     }
 
-    if (char === ')') {
+    if (curChar === ')') {
       break;
     }
 
-    const curOperator = char;
+    const curOperator = curChar;
+
+    // Special case for: 1++2, 1+-2, 1*-2, 1*+2
+    if (isOperator(prevChar)) {
+      operands.push(curOperator === '+' ? 1 : -1);
+      operators.push('*');
+      continue;
+    }
+
     consumeLastTimesOrDivide(operands, operators, curOperand);
     operators.push(curOperator);
     curOperand = 0;
@@ -34,6 +45,11 @@ function evalHelper(expr: string, info: { i: number }): number {
 
   consumeLastTimesOrDivide(operands, operators, curOperand);
   return consumeAddOrMinus(operands, operators);
+}
+
+function isOperator(s?: string) {
+  if (!s) return false;
+  return ['+', '-', '*', '/'].includes(s);
 }
 
 function consumeAddOrMinus(operands: number[], operators: string[]): number {
@@ -56,19 +72,22 @@ function consumeAddOrMinus(operands: number[], operators: string[]): number {
 }
 
 function consumeLastTimesOrDivide(operands: number[], operators: string[], curOperand: number) {
-  const lastOperator = operators.at(-1);
-  if (lastOperator === '*' || lastOperator === '/') {
+  let lastOperator = operators.at(-1);
+
+  while (lastOperator === '*' || lastOperator === '/') {
     operators.pop();
     const lastOperand = operands.pop() as number;
 
     if (lastOperator === '*') {
-      operands.push(lastOperand * curOperand);
+      curOperand = lastOperand * curOperand;
     } else {
-      operands.push(lastOperand / curOperand);
+      curOperand = lastOperand / curOperand;
     }
-  } else {
-    operands.push(curOperand);
+
+    lastOperator = operators.at(-1);
   }
+
+  operands.push(curOperand);
 }
 
 function validator() {
