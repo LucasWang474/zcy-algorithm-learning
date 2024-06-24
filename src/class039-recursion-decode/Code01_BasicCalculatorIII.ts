@@ -16,6 +16,15 @@ function evalHelper(expr: string, info: { i: number }): number {
       continue;
     }
 
+    if (char === '(') {
+      curOperand = evalHelper(expr, info);
+      continue;
+    }
+
+    if (char === ')') {
+      break;
+    }
+
     const curOperator = char;
     consumeLastTimesOrDivide(operands, operators, curOperand);
     operators.push(curOperator);
@@ -96,29 +105,39 @@ function validator() {
     return;
   }
 
-  // i1 = '(3-2*4/2)+9';
-  // e1 = eval(i1);
-  // a1 = myEval(i1);
-  // if (e1 !== a1) {
-  //   console.error(e1, a1, i1);
-  //   return;
-  // }
-  //
-  // i1 = '36-(4*(3+2*(1-6))+5)+17';
-  // e1 = eval(i1);
-  // a1 = myEval(i1);
-  // if (e1 !== a1) {
-  //   console.error(e1, a1, i1);
-  //   return;
-  // }
-  //
-  // i1 = '-5+9*3-(2)+1/1';
-  // e1 = eval(i1);
-  // a1 = myEval(i1);
-  // if (e1 !== a1) {
-  //   console.error(e1, a1, i1);
-  //   return;
-  // }
+  i1 = '(-10)';
+  e1 = eval(i1);
+  a1 = myEval(i1);
+  if (e1 !== a1) {
+    console.error(e1, a1, i1);
+    return;
+  }
+
+  i1 = '(3-2*4/2)+9';
+  e1 = eval(i1);
+  a1 = myEval(i1);
+  if (e1 !== a1) {
+    console.error(e1, a1, i1);
+    return;
+  }
+
+  i1 = '36-(4*(3+2*(1-6))+5)+17';
+  e1 = eval(i1);
+  a1 = myEval(i1);
+  if (e1 !== a1) {
+    console.error(e1, a1, i1);
+    return;
+  }
+
+  i1 = '-5+9*3-(2)+1/1';
+  e1 = eval(i1);
+  a1 = myEval(i1);
+  if (e1 !== a1) {
+    console.error(e1, a1, i1);
+    return;
+  }
+
+  console.log('>>> All passed!');
 }
 
 validator();
