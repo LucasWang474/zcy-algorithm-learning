@@ -74,6 +74,13 @@ function consumeLastTimesOrDivide(operands: number[], operators: string[], curOp
 function validator() {
   let i1, e1, a1;
 
+  i1 = '1+-2';
+  e1 = eval(i1);
+  a1 = myEval(i1);
+  if (e1 !== a1) {
+    console.error(e1, a1, i1);
+    return;
+  }
   i1 = '-10';
   e1 = eval(i1);
   a1 = myEval(i1);
