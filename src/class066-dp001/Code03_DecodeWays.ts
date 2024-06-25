@@ -4,7 +4,49 @@ const UPPER = 26,
   LOWER = 1;
 
 function numDecodings(s: string): number {
-  return numDecodingsRecur(s, [], 0);
+  return numDecodingsBottomUp2(s);
+}
+
+function numDecodingsBottomUp2(s: string): number {
+  let next = 1,
+    nextNext = 0;
+
+  for (let i = s.length - 1; i >= 0; i--) {
+    let cur = 0;
+
+    if (s[i] === '0') {
+      [next, nextNext] = [cur, next];
+      continue;
+    }
+
+    cur += next;
+    if (i + 1 < s.length && +s[i] * 10 + +s[i + 1] <= UPPER) {
+      cur += nextNext;
+    }
+
+    [next, nextNext] = [cur, next];
+  }
+
+  return next;
+}
+
+function numDecodingsBottomUp(s: string): number {
+  const dp = new Array(s.length + 1).fill(0);
+  dp[s.length] = 1;
+
+  for (let i = s.length - 1; i >= 0; i--) {
+    if (s[i] === '0') {
+      dp[i] = 0;
+      continue;
+    }
+
+    dp[i] += dp[i + 1];
+    if (i + 1 < s.length && +s[i] * 10 + +s[i + 1] <= UPPER) {
+      dp[i] += dp[i + 2];
+    }
+  }
+
+  return dp[0];
 }
 
 function numDecodingsRecur(s: string, dp: number[], i: number): number {
@@ -34,8 +76,6 @@ function numDecodingsRecur(s: string, dp: number[], i: number): number {
   dp[i] = count;
   return count;
 }
-
-function numDecodingsBottomUp(s: string): number {}
 
 function validator() {
   let expected, actual, input;
