@@ -1,14 +1,18 @@
 // https://leetcode.com/problems/decode-ways/
+
+const UPPER = 26,
+  LOWER = 1;
+
 function numDecodings(s: string): number {
-  return numDecodingsRecur(s, new Set(new Array(26).fill(0).map((_, idx) => idx + 1)), [], 0);
+  return numDecodingsRecur(s, [], 0);
 }
 
-function numDecodingsRecur(s: string, set: Set<number>, dp: number[], i: number): number {
+function numDecodingsRecur(s: string, dp: number[], i: number): number {
   if (i >= s.length) return 1;
   if (dp[i] !== undefined) return dp[i];
 
   if (i === s.length - 1) {
-    if (set.has(+s[i])) {
+    if (+s[i] >= LOWER && +s[i] <= UPPER) {
       dp[i] = 1;
       return 1;
     }
@@ -22,14 +26,16 @@ function numDecodingsRecur(s: string, set: Set<number>, dp: number[], i: number)
     return 0;
   }
 
-  let count = numDecodingsRecur(s, set, dp, i + 1);
-  if (i + 1 < s.length && +s[i] * 10 + +s[i + 1] <= 26) {
-    count += numDecodingsRecur(s, set, dp, i + 2);
+  let count = numDecodingsRecur(s, dp, i + 1);
+  if (i + 1 < s.length && +s[i] * 10 + +s[i + 1] <= UPPER) {
+    count += numDecodingsRecur(s, dp, i + 2);
   }
 
   dp[i] = count;
   return count;
 }
+
+function numDecodingsBottomUp(s: string): number {}
 
 function validator() {
   let expected, actual, input;
