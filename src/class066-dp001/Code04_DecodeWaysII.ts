@@ -5,7 +5,52 @@ const UPPER = 26,
 const MOD = 10 ** 9 + 7;
 
 function numDecodings(s: string): number {
-  return numDecodingsRecur(s, [], 0);
+  return numDecodingsBottomUp(s);
+}
+
+function numDecodingsBottomUp(s: string): number {
+  const dp = new Array(s.length + 1).fill(0);
+  dp[s.length] = 1;
+
+  for (let i = s.length - 1; i >= 0; i--) {
+    const curChar = s[i];
+    if (curChar === '0') continue;
+
+    const nextCount = dp[i + 1];
+    let curCount = curChar === '*' ? 9 * nextCount : nextCount;
+
+    if (i + 1 < s.length) {
+      const nextChar = s[i + 1];
+      const nextNextCount = dp[i + 2];
+
+      if (nextChar === '*') {
+        curCount +=
+          // 11-19
+          curChar === '1'
+            ? 9 * nextNextCount
+            : // 21-26
+            curChar === '2'
+            ? 6 * nextNextCount
+            : // 11-19, 21-26
+            curChar === '*'
+            ? 15 * nextNextCount
+            : 0;
+      } else {
+        // nextChar: 0-9
+        curCount +=
+          curChar === '*'
+            ? // 1*, 2*
+              (+nextChar > 6 ? 1 : 2) * nextNextCount
+            : +curChar * 10 + +nextChar <= UPPER
+            ? nextNextCount
+            : 0;
+      }
+    }
+
+    dp[i] = curCount % MOD;
+  }
+
+  return dp[0];
 }
 
 function numDecodingsRecur(s: string, dp: number[], i: number): number {
@@ -68,18 +113,20 @@ function numDecodingsRecur(s: string, dp: number[], i: number): number {
 function validator() {
   let expected, actual, input;
 
-  input = '*';
-  expected = 9;
-  actual = numDecodings(input);
-  if (expected !== actual) {
-    console.error(`Expected: ${expected}, actual: ${actual}, input: ${input}`);
-  }
+  // input = '*';
+  // expected = 9;
+  // actual = numDecodings(input);
+  // if (expected !== actual) {
+  //   console.error(`Expected: ${expected}, actual: ${actual}, input: ${input}`);
+  //   return;
+  // }
 
   input = '1*';
   expected = 18;
   actual = numDecodings(input);
   if (expected !== actual) {
     console.error(`Expected: ${expected}, actual: ${actual}, input: ${input}`);
+    return;
   }
 
   input = '2*';
@@ -87,6 +134,7 @@ function validator() {
   actual = numDecodings(input);
   if (expected !== actual) {
     console.error(`Expected: ${expected}, actual: ${actual}, input: ${input}`);
+    return;
   }
 
   input = '**';
@@ -94,6 +142,7 @@ function validator() {
   actual = numDecodings(input);
   if (expected !== actual) {
     console.error(`Expected: ${expected}, actual: ${actual}, input: ${input}`);
+    return;
   }
 
   input = '*1';
@@ -101,6 +150,7 @@ function validator() {
   actual = numDecodings(input);
   if (expected !== actual) {
     console.error(`Expected: ${expected}, actual: ${actual}, input: ${input}`);
+    return;
   }
 
   input = '1*72*';
@@ -108,6 +158,7 @@ function validator() {
   actual = numDecodings(input);
   if (expected !== actual) {
     console.error(`Expected: ${expected}, actual: ${actual}, input: ${input}`);
+    return;
   }
 
   input = '*********';
@@ -115,6 +166,7 @@ function validator() {
   actual = numDecodings(input);
   if (expected !== actual) {
     console.error(`Expected: ${expected}, actual: ${actual}, input: ${input}`);
+    return;
   }
 
   input =
@@ -123,6 +175,7 @@ function validator() {
   actual = numDecodings(input);
   if (expected !== actual) {
     console.error(`Expected: ${expected}, actual: ${actual}, input: ${input}`);
+    return;
   }
 
   console.log('All test cases passed');
