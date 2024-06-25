@@ -5,7 +5,53 @@ const UPPER = 26,
 const MOD = 10 ** 9 + 7;
 
 function numDecodings(s: string): number {
-  return numDecodingsBottomUp(s);
+  return numDecodingsBottomUp2(s);
+}
+
+function numDecodingsBottomUp2(s: string): number {
+  let nextCount = 1,
+    nextNextCount = 0;
+
+  for (let i = s.length - 1; i >= 0; i--) {
+    const curChar = s[i];
+    if (curChar === '0') {
+      [nextCount, nextNextCount] = [0, nextCount];
+      continue;
+    }
+
+    let curCount = curChar === '*' ? 9 * nextCount : nextCount;
+
+    if (i + 1 < s.length) {
+      const nextChar = s[i + 1];
+
+      if (nextChar === '*') {
+        curCount +=
+          // 11-19
+          curChar === '1'
+            ? 9 * nextNextCount
+            : // 21-26
+            curChar === '2'
+            ? 6 * nextNextCount
+            : // 11-19, 21-26
+            curChar === '*'
+            ? 15 * nextNextCount
+            : 0;
+      } else {
+        // nextChar: 0-9
+        curCount +=
+          curChar === '*'
+            ? // 1*, 2*
+              (+nextChar > 6 ? 1 : 2) * nextNextCount
+            : +curChar * 10 + +nextChar <= UPPER
+            ? nextNextCount
+            : 0;
+      }
+    }
+
+    [nextCount, nextNextCount] = [curCount % MOD, nextCount];
+  }
+
+  return nextCount;
 }
 
 function numDecodingsBottomUp(s: string): number {
