@@ -14,32 +14,34 @@ class _Node {
 function copyRandomList(head: _Node | null): _Node | null {
   if (!head) return null;
 
-  let ptr: _Node | null = head,
-    next: _Node | null = null;
+  // Round 1: Copy next
+  let ptr = head;
   while (ptr) {
-    next = ptr.next;
-
-    ptr.next = new _Node(ptr.val, next || undefined);
+    const next = ptr.next;
+    ptr.next = new _Node(ptr.val, next);
     ptr = next;
   }
 
+  // Round 2: copy random
   ptr = head;
-  while (ptr?.next) {
+  while (ptr) {
+    const next = ptr.next.next;
     ptr.next.random = ptr.random?.next || null;
-    ptr = ptr.next.next;
+    ptr = next;
   }
 
+  // Round 3: restore
   const res = head.next;
-  let ptrOld: ListNode | null = head;
-  let ptrNew: ListNode | null = head.next;
-  while (ptrOld && ptrNew) {
-    const next = ptrNew.next;
-    ptrNew.next = next?.next || null;
-    ptrOld.next = next;
 
-    ptrNew = next?.next || null;
-    ptrOld = next || null;
+  let ptr1 = head,
+    ptr2 = head.next;
+  while (ptr1) {
+    ptr1.next = ptr2.next;
+    ptr1 = ptr1.next;
+
+    ptr2.next = ptr1?.next || null;
+    ptr2 = ptr2.next;
   }
 
-  return res as _Node;
+  return res;
 }

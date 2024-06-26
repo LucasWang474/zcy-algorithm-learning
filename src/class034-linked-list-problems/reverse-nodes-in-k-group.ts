@@ -16,77 +16,70 @@ class ListNode {
 // Follow-up: Can you solve the problem in O(1) extra memory space?
 
 function reverseKGroupRecur(head: ListNode | null, k: number): ListNode | null {
-  if (!head) return null;
-  if (k === 1) return head;
+  if (k === 1 || !head) return head;
 
-  let ptr: ListNode | null = head;
-  for (let i = 0; i < k - 1; i++) {
-    if (!ptr) break;
-    ptr = ptr.next;
-  }
-  if (!ptr) return head;
+  const oldTail = getNodeEnd(head, k);
 
-  const next = ptr.next;
-  ptr.next = null;
+  if (!oldTail) return head;
 
-  const newHead = reverseList(head);
+  const nextHead = oldTail.next;
+  oldTail.next = null;
+
   const newTail = head;
-  newTail.next = reverseKGroupRecur(next, k);
+  const newHead = reverseList(head);
 
+  newTail.next = reverseKGroup(nextHead, k);
   return newHead;
 }
 
 function reverseKGroup(head: ListNode | null, k: number): ListNode | null {
-  if (!head) return null;
-  if (k === 1) return head;
+  if (k === 1 || !head) return head;
 
-  let res;
-  let ptr: ListNode | null = head;
-  let prevTail: ListNode | null = null;
+  let oldTail = getNodeEnd(head, k);
+  if (!oldTail) return head;
 
-  while (ptr) {
-    const oldHead = ptr;
-    const oldTail = getGroupKEnd(ptr, k);
-    if (!oldTail) break;
+  let nextHead = oldTail.next;
+  oldTail.next = null;
 
-    const next: ListNode | null = oldTail.next;
+  const newHead = reverseList(head);
+
+  let prevTail = head;
+  while (nextHead) {
+    oldTail = getNodeEnd(nextHead, k);
+    if (!oldTail) {
+      prevTail.next = nextHead;
+      break;
+    }
+
+    const next = oldTail.next;
     oldTail.next = null;
 
-    const reversed = reverseList(oldHead);
-
-    if (!res) res = reversed;
-
-    if (prevTail) prevTail.next = reversed;
-    prevTail = oldHead;
-
-    oldHead.next = next;
-    ptr = next;
+    prevTail.next = reverseList(nextHead);
+    prevTail = nextHead;
+    nextHead = next;
   }
 
-  return res || head;
+  return newHead;
 }
 
-function getGroupKEnd(node: ListNode | null, k: number) {
+function getNodeEnd(head: ListNode | null, k: number) {
+  let res = head;
   for (let i = 0; i < k - 1; i++) {
-    if (!node) break;
-    node = node.next;
+    if (!res) break;
+    res = res.next;
   }
-  return node;
+  return res;
 }
 
-function reverseList(node: ListNode | null) {
-  if (!node) return null;
+function reverseList(head: ListNode | null) {
+  if (!head) return null;
 
   let reversed = null;
-
-  let head: ListNode | null = node;
-
   while (head) {
-    const next: ListNode | null = head.next;
+    const next = head.next;
     head.next = reversed;
     reversed = head;
     head = next;
   }
-
   return reversed;
 }
