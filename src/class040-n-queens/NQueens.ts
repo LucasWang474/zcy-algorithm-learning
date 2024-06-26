@@ -21,6 +21,29 @@ function totalNQueensRecur(n: number, queens: [number, number][], row: number) {
   return count;
 }
 
+// https://leetcode.com/problems/n-queens/description/
+function solveNQueens(n: number, row = 0, queens: [number, number][] = [], res: string[][] = []) {
+  if (row >= n) {
+    res.push(queens.map((pos) => getRowString(pos[1], n)));
+    return res;
+  }
+
+  for (let col = 0; col < n; col++) {
+    const pos: [number, number] = [row, col];
+    if (isValidPosition(pos, queens)) {
+      queens.push(pos);
+      solveNQueens(n, row + 1, queens, res);
+      queens.pop();
+    }
+  }
+
+  return res;
+}
+
+function getRowString(col: number, n: number) {
+  return '.'.repeat(Math.max(0, col)) + 'Q' + '.'.repeat(n - col - 1);
+}
+
 function isValidPosition(cur: [number, number], taken: [number, number][]) {
   const [x1, y1] = cur;
   return taken.every(([x2, y2]) => {
