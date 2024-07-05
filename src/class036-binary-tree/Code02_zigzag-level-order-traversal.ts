@@ -40,27 +40,22 @@ function zigzagLevelOrderIter(root: TreeNode | null): number[][] {
   return res;
 }
 
-function zigzagLevelOrderRecur(
-  root: TreeNode | null,
-  depth = 0,
-  reverse = false,
-  res: number[][] = [],
-): number[][] {
+function zigzagLevelOrderRecur(root: TreeNode | null, depth = 0, res: number[][] = []): number[][] {
   if (!root) return res;
 
+  zigzagLevelOrderRecur(root.left, depth + 1, res);
+  zigzagLevelOrderRecur(root.right, depth + 1, res);
+
+  const val = root.val;
   if (res[depth]) {
-    res[depth].push(root.val);
+    res[depth].push(val);
   } else {
-    res[depth] = [root.val];
+    res[depth] = [val];
   }
 
-  zigzagLevelOrderRecur(root.left, depth + 1, !reverse, res);
-  zigzagLevelOrderRecur(root.right, depth + 1, !reverse, res);
-
   if (depth === 0) {
-    for (let i = 1; i < res.length; i++) {
-      const needReverse = i % 2;
-      if (needReverse) res[i].reverse();
+    for (let i = 0; i < res.length; i++) {
+      if (i % 2 === 1) res[i].reverse();
     }
   }
 
