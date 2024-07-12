@@ -18,23 +18,24 @@ function zigzagLevelOrderIter(root: TreeNode | null): number[][] {
   if (!root) return [];
 
   let reverse = false;
-  let queue = [root];
+  let curLevel = [root];
   const res: number[][] = [];
 
-  while (queue.length) {
+  while (curLevel.length) {
+    const nextLevel = [];
     const vals = [];
-    const nodes = [];
 
-    for (const node of queue) {
+    for (const node of curLevel) {
       vals.push(node.val);
-
-      if (node.left) nodes.push(node.left);
-      if (node.right) nodes.push(node.right);
+      if (node.left) nextLevel.push(node.left);
+      if (node.right) nextLevel.push(node.right);
     }
 
-    res.push(reverse ? vals.reverse() : vals);
-    queue = nodes;
+    if (reverse) vals.reverse();
     reverse = !reverse;
+
+    curLevel = nextLevel;
+    res.push(vals);
   }
 
   return res;
