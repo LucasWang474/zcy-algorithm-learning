@@ -41,23 +41,27 @@ function widthOfBinaryTreeIter(root: TreeNode | null): number {
   return maxRes;
 }
 
-function widthOfBinaryTreeRecur(root: TreeNode | null): number {
+function widthOfBinaryTreeRecur(
+  root: TreeNode | null,
+  startIndices: number[],
+  depth: number,
+  idx: number,
+) {
   if (!root) return 0;
 
-  let maxWidth = 1;
-
-  function dfs(cur: TreeNode | null, depth: number, startIndices: number[], curIndex: number) {
-    if (!cur) return;
-
-    if (!startIndices[depth]) startIndices[depth] = curIndex;
-
-    const curWidth = curIndex - startIndices[depth] + 1;
-    maxWidth = Math.max(maxWidth, curWidth);
-
-    dfs(cur.left, depth + 1, startIndices, curWidth * 2);
-    dfs(cur.right, depth + 1, startIndices, curWidth * 2 + 1);
+  if (startIndices[depth] === undefined) {
+    startIndices[depth] = idx;
   }
 
-  dfs(root, 0, [1], 1);
-  return maxWidth;
+  return Math.max(
+    1,
+    idx - startIndices[depth] + 1,
+    widthOfBinaryTreeRecur(root.left, startIndices, depth + 1, (idx - startIndices[depth]) * 2 + 1),
+    widthOfBinaryTreeRecur(
+      root.right,
+      startIndices,
+      depth + 1,
+      (idx - startIndices[depth]) * 2 + 2,
+    ),
+  );
 }
