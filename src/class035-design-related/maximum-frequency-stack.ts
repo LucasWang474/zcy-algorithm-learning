@@ -1,35 +1,29 @@
 // https://leetcode.com/problems/maximum-frequency-stack/description/
 
 class FreqStack {
-  valToFrequencyMap = new Map<number, number>();
-  stack: number[][] = [];
-  maxFreq = 0;
+  valToFreqMap = new Map<number, number>();
+  freq2d: number[][] = [];
 
   constructor() {}
 
   push(val: number): void {
-    this.valToFrequencyMap.set(val, (this.valToFrequencyMap.get(val) || 0) + 1);
-    const newFreq = this.valToFrequencyMap.get(val) as number;
+    const count = this.valToFreqMap.get(val) || 0;
 
-    if (newFreq > this.maxFreq) {
-      this.maxFreq = newFreq;
-      this.stack.push([val]);
-    } else {
-      this.stack[newFreq - 1].push(val);
-    }
+    if (!this.freq2d[count]) this.freq2d[count] = [];
+    this.freq2d[count].push(val);
+
+    this.valToFreqMap.set(val, count + 1);
   }
 
   pop(): number {
-    const res = this.stack[this.maxFreq - 1].pop() as number;
-    this.valToFrequencyMap.set(res, (this.valToFrequencyMap.get(res) as number) - 1);
-    if (!this.valToFrequencyMap.get(res)) {
-      this.valToFrequencyMap.delete(res);
+    const res = this.freq2d[this.freq2d.length - 1].pop() as number;
+    if (!this.freq2d[this.freq2d.length - 1].length) this.freq2d.pop();
+
+    this.valToFreqMap.set(res, (this.valToFreqMap.get(res) as number) - 1);
+    if (!this.valToFreqMap.get(res)) {
+      this.valToFreqMap.delete(res);
     }
 
-    if (!this.stack[this.maxFreq - 1].length) {
-      this.maxFreq--;
-      this.stack.pop();
-    }
     return res;
   }
 }
