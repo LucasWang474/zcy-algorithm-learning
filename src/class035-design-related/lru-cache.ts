@@ -1,101 +1,88 @@
 class LRUCache {
-  private doubleList: DoubleList = new DoubleList();
-  private keyToNode: Map<number, DoubleNode> = new Map();
-  private readonly capacity: number;
+  list = new DoubleList();
+  keyToNodeMap: Map<number, DoubleNode> = new Map();
+  capacity: number;
 
   constructor(capacity: number) {
     this.capacity = capacity;
   }
 
   get(key: number): number {
-    const node = this.keyToNode.get(key);
-    if (!node) return -1;
+    if (!this.keyToNodeMap.has(key)) return -1;
 
-    this.doubleList.moveToTail(node);
-    return node.value;
+    const node = this.keyToNodeMap.get(key) as DoubleNode;
+    const val = node.val;
+    this.list.moveToEnd(node);
+    return val;
   }
 
   put(key: number, value: number): void {
-    const existed = this.keyToNode.has(key);
+    let node = this.keyToNodeMap.get(key);
+    if (node) {
+      node.val = value;
+      this.list.moveToEnd(node);
+    } else {
+      node = new DoubleNode(key, value);
+      this.keyToNodeMap.set(key, node);
+      this.list.insertToEnd(node);
 
-    if (existed) {
-      const node = this.keyToNode.get(key) as DoubleNode;
-      node.value = value;
-      this.doubleList.moveToTail(node);
-      return;
+      if (this.keyToNodeMap.size > this.capacity) {
+        const oldNode = this.list.head.next as DoubleNode;
+        this.keyToNodeMap.delete(oldNode.key);
+        this.list.delete(oldNode);
+      }
     }
-
-    if (this.capacity <= this.keyToNode.size) {
-      const leastUsedNode = this.doubleList.head as DoubleNode;
-      this.keyToNode.delete(leastUsedNode.key);
-      this.doubleList.removeHead();
-    }
-
-    const newNode = new DoubleNode(key, value);
-    this.keyToNode.set(key, newNode);
-    this.doubleList.addToTail(newNode);
-  }
-}
-
-class DoubleNode {
-  public key;
-  public value;
-  public next?: DoubleNode | null;
-  public prev?: DoubleNode | null;
-
-  constructor(key: number, value: number) {
-    this.key = key;
-    this.value = value;
   }
 }
 
 class DoubleList {
-  public head: DoubleNode | null = null;
-  public tail: DoubleNode | null = null;
+  head: DoubleNode;
+  tail: DoubleNode;
 
-  constructor() {}
+  constructor() {
+    this.head = new DoubleNode(Infinity, Infinity);
+    this.tail = new DoubleNode(Infinity, Infinity);
 
-  moveToTail(node: DoubleNode) {
-    if (!node) return;
-    if (!this.tail || !this.head) return;
-    if (node === this.tail) return;
-
-    const next = node.next as DoubleNode;
-    next.prev = node.prev;
-    if (node.prev) {
-      node.prev.next = next;
-    } else {
-      this.head = next;
-    }
-
-    this.tail.next = node;
-    node.prev = this.tail;
-    this.tail = node;
+    this.head.next = this.tail;
+    this.tail.prev = this.head;
   }
 
-  removeHead() {
-    if (!this.head) return;
-    if (this.head === this.tail) {
-      this.head = this.tail = null;
-      return;
-    }
+  delete(node: DoubleNode) {
+    node.prev!.next = node.next;
+    node.next!.prev = node.prev;
 
-    const next = this.head.next as DoubleNode;
-    next.prev = null;
-    this.head.next = null;
-    this.head = next;
+    node.next = null;
+    node.prev = null;
   }
 
-  addToTail(node: DoubleNode) {
-    if (!this.tail || !this.head) {
-      this.head = this.tail = node;
-      node.prev = null;
-      node.next = null;
-      return;
-    }
+  insertToEnd(node: DoubleNode) {
+    const tailPrev = this.tail.prev;
 
-    this.tail.next = node;
-    node.prev = this.tail;
-    this.tail = node;
+    tailPrev!.next = node;
+    node.next = this.tail;
+
+    this.tail.prev = node;
+    node.prev = tailPrev;
+  }
+
+  moveToEnd(node: DoubleNode) {
+    node.prev!.next = node.next;
+    node.next!.prev = node.prev;
+    node.next = null;
+    node.prev = null;
+
+    this.insertToEnd(node);
+  }
+}
+
+class DoubleNode {
+  key: number;
+  val: number;
+  next?: DoubleNode | null;
+  prev?: DoubleNode | null;
+
+  constructor(key: number, val: number) {
+    this.key = key;
+    this.val = val;
   }
 }
