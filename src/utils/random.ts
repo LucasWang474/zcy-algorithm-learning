@@ -1,4 +1,4 @@
-import { MyListNode } from './linked-list';
+import { MyListNode } from "./linked-list";
 
 export function getRandomArray(
   size = 100,

@@ -41,4 +41,4 @@ function isCompleteTree(root: TreeNode | null): boolean {
 //   2   _
 //  4 _ _ _
 const res = isCompleteTree(new TreeNode(1, new TreeNode(2, new TreeNode(4))));
-console.log('>>> res', res);
+console.log(">>> res", res);

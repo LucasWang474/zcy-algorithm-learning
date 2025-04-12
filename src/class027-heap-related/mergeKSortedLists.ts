@@ -1,6 +1,6 @@
 // https://leetcode.com/problems/merge-k-sorted-lists/
-import { ListNode } from '@/utils/linked-list';
-import { MyHeap } from '@/utils/heap';
+import { ListNode } from "@/utils/linked-list";
+import { MyHeap } from "@/utils/heap";
 
 function mergeKLists(lists: Array<ListNode | null>): ListNode | null {
   if (!lists) return null;

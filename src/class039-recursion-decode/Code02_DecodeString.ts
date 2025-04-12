@@ -5,34 +5,34 @@ function decodeString(s: string): string {
 }
 
 function decodeStringHelper(s: string, info: { i: number }): string {
-  if (info.i >= s.length) return '';
+  if (info.i >= s.length) return "";
 
   let k = 0,
-    totalPath = '',
-    curPath = '';
+    totalPath = "",
+    curPath = "";
 
   while (info.i < s.length) {
     const char = s[info.i++];
 
-    if (char >= '0' && char <= '9') {
+    if (char >= "0" && char <= "9") {
       k = k * 10 + Number(char);
 
       totalPath += curPath;
-      curPath = '';
+      curPath = "";
 
       continue;
     }
 
-    if (char === '[') {
+    if (char === "[") {
       curPath = decodeStringHelper(s, info);
       totalPath += curPath.repeat(k);
 
       k = 0;
-      curPath = '';
+      curPath = "";
       continue;
     }
 
-    if (char === ']') {
+    if (char === "]") {
       break;
     }
 
@@ -46,31 +46,31 @@ function decodeStringHelper(s: string, info: { i: number }): string {
 function validator() {
   let input, expected, actual;
 
-  input = '3[a]2[bc]';
-  expected = 'aaabcbc';
+  input = "3[a]2[bc]";
+  expected = "aaabcbc";
   actual = decodeString(input);
   if (expected !== actual) {
     console.error(`Failed: input = ${input}. Expected: ${expected}. Got: ${actual}.`);
     return;
   }
 
-  input = '3[a2[c]]';
-  expected = 'accaccacc';
+  input = "3[a2[c]]";
+  expected = "accaccacc";
   actual = decodeString(input);
   if (expected !== actual) {
     console.error(`Failed: input = ${input}. Expected: ${expected}. Got: ${actual}.`);
     return;
   }
 
-  input = '2[abc]3[cd]ef';
-  expected = 'abcabccdcdcdef';
+  input = "2[abc]3[cd]ef";
+  expected = "abcabccdcdcdef";
   actual = decodeString(input);
   if (expected !== actual) {
     console.error(`Failed: input = ${input}. Expected: ${expected}. Got: ${actual}.`);
     return;
   }
 
-  console.log('All test cases passed');
+  console.log("All test cases passed");
 }
 
 validator();

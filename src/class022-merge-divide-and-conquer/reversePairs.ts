@@ -1,6 +1,6 @@
 // https://leetcode.com/problems/reverse-pairs/description/
 
-import { getRandomArray } from '@/utils/random';
+import { getRandomArray } from "@/utils/random";
 
 let help: number[] = [];
 
@@ -90,7 +90,7 @@ function validator(times = 100, arrSize = 10) {
       return;
     }
   }
-  console.log('All passed!', times);
+  console.log("All passed!", times);
 }
 
 validator(+process.argv[2], +process.argv[3]);

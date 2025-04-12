@@ -1,8 +1,8 @@
 // https://leetcode.com/problems/kth-largest-element-in-an-array/description/
 
-import { getRandomArray } from '@/utils/random';
-import process from 'node:process';
-import { swap } from '@/utils/array';
+import { getRandomArray } from "@/utils/random";
+import process from "node:process";
+import { swap } from "@/utils/array";
 
 function findKthLargest(nums: number[], k: number): number {
   return quickSelect(nums, nums.length - k);
@@ -66,7 +66,7 @@ function validator(times = 100, arrSize = 10) {
     }
   }
 
-  console.log('>>> All passed!', times);
+  console.log(">>> All passed!", times);
 }
 
 validator(+process.argv[2], +process.argv[3]);

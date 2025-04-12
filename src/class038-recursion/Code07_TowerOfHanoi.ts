@@ -1,6 +1,6 @@
 function printHanoi(total: number) {
   if (total > 0) {
-    printHanoiRecur(total, 'A', 'C', 'B');
+    printHanoiRecur(total, "A", "C", "B");
   }
 }
 

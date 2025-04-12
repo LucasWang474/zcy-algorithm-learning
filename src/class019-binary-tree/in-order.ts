@@ -1,4 +1,4 @@
-import { TreeNode } from '@/utils/linked-list';
+import { TreeNode } from "@/utils/linked-list";
 
 // This one is better
 function inorderTraversal(root: TreeNode | null): number[] {
@@ -32,7 +32,7 @@ function inorderTraversal2(root: TreeNode | null): number[] {
   while (stack.length) {
     const head = stack.pop();
 
-    if (typeof head === 'number') {
+    if (typeof head === "number") {
       res.push(head);
     } else if (head) {
       if (head.right) {

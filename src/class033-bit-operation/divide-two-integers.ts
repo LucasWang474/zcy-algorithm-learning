@@ -1,6 +1,6 @@
 // https://leetcode.com/problems/divide-two-integers/description/
-import process from 'node:process';
-import { getRandomInteger } from '@/utils/random';
+import process from "node:process";
+import { getRandomInteger } from "@/utils/random";
 
 function add(num1: number, num2: number) {
   let res = num1;
@@ -42,7 +42,7 @@ function multiply(num1: number, num2: number) {
 
 function divideSimple(a: number, b: number) {
   if (b === 0) {
-    throw new Error('divisor can not be zero');
+    throw new Error("divisor can not be zero");
   }
 
   let res = 0;
@@ -85,7 +85,7 @@ function divide(dividend: number, divisor: number): number {
 }
 
 function validator(times = 100) {
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
   for (let i = 0; i < times; i++) {
     const num1 = getRandomInteger(2 ** 31 + 1);
     const num2 = getRandomInteger(2 ** 31 + 1);
@@ -93,13 +93,13 @@ function validator(times = 100) {
     const expected = (num1 + num2) | 0; // for overflow case
     const actual = add(num1, num2);
     if (expected !== actual) {
-      console.error('add', expected, actual, num1, num2);
+      console.error("add", expected, actual, num1, num2);
       return;
     }
   }
-  console.log('>>> All tests for add passed!', times);
+  console.log(">>> All tests for add passed!", times);
 
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
   for (let i = 0; i < times; i++) {
     const num1 = getRandomInteger(2 ** 31 + 1);
     const num2 = getRandomInteger(2 ** 31 + 1);
@@ -107,13 +107,13 @@ function validator(times = 100) {
     const expected = (num1 - num2) | 0; // for overflow case
     const actual = minus(num1, num2);
     if (expected !== actual) {
-      console.error('minus', expected, actual, num1, num2);
+      console.error("minus", expected, actual, num1, num2);
       return;
     }
   }
-  console.log('>>> All tests for minus passed!', times);
+  console.log(">>> All tests for minus passed!", times);
 
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
   for (let i = 0; i < times; i++) {
     const num1 = getRandomInteger(2 ** 20);
     const num2 = getRandomInteger(2 ** 20);
@@ -121,13 +121,13 @@ function validator(times = 100) {
     const expected = (num1 * num2) | 0; // for overflow case
     const actual = multiply(num1, num2);
     if (expected !== actual) {
-      console.error('multiply', expected, actual, num1, num2);
+      console.error("multiply", expected, actual, num1, num2);
       return;
     }
   }
-  console.log('>>> All tests for multiply passed!', times);
+  console.log(">>> All tests for multiply passed!", times);
 
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
   for (let i = 0; i < times; i++) {
     const num1 = getRandomInteger(2 ** 31 + 1);
     const num2 = getRandomInteger(2 ** 31 + 1);
@@ -137,11 +137,11 @@ function validator(times = 100) {
     const expected = ~~Math.trunc(num1 / num2); // for overflow case
     const actual = divide(num1, num2);
     if (expected !== actual) {
-      console.error('divide', expected, actual, num1, num2);
+      console.error("divide", expected, actual, num1, num2);
       return;
     }
   }
-  console.log('>>> All tests for divide passed!', times);
+  console.log(">>> All tests for divide passed!", times);
 }
 
 validator(+process.argv[2]);

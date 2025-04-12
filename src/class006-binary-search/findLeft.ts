@@ -1,9 +1,9 @@
 /**
  * Find the leftmost number which is greater than or equals to the target.
  */
-import { getRandomArray } from '@/utils/random';
-import { sortNumsArrayInPlace } from '@/utils/array';
-import * as process from 'node:process';
+import { getRandomArray } from "@/utils/random";
+import { sortNumsArrayInPlace } from "@/utils/array";
+import * as process from "node:process";
 
 function bf(nums: number[], target: number) {
   for (let i = 0; i < nums.length; i++) {
@@ -49,7 +49,7 @@ function validator(times = 100) {
       return;
     }
   }
-  console.log('All passed');
+  console.log("All passed");
 }
 
 validator(+process.argv[2]);

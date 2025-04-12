@@ -30,7 +30,7 @@ function subsetsWithDupRecur(nums: number[], i: number, path: number[], res: num
 }
 
 const res1 = subsetsWithDup([1, 2, 2]);
-console.log('>>> a1', res1);
+console.log(">>> a1", res1);
 
 const res2 = subsetsWithDup([0]);
-console.log('>>> a1', res2);
+console.log(">>> a1", res2);

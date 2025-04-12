@@ -1,8 +1,8 @@
 // 返回大于等于n的最小的2某次方
 // 如果int范围内不存在这样的数，返回整数最小值
 
-import { getRandomInteger } from '@/utils/random';
-import process from 'node:process';
+import { getRandomInteger } from "@/utils/random";
+import process from "node:process";
 
 function near2Power(num: number) {
   if (num <= 0) return 1;
@@ -34,7 +34,7 @@ function validator(times = 100, size = 2 ** 31 + 4) {
     }
   }
 
-  console.log('>>> All passed!', times);
+  console.log(">>> All passed!", times);
 }
 
 if (+process.argv[3]) {

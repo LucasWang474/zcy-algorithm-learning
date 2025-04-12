@@ -1,6 +1,6 @@
 // https://www.nowcoder.com/practice/1ae8d0b6bb4e4bcdbf64ec491f63fc37
 
-import { MyHeap } from '@/utils/heap';
+import { MyHeap } from "@/utils/heap";
 
 // const readline = require('readline');
 //
@@ -94,7 +94,7 @@ function validator(times = 100, arrSize = 10) {
     }
   }
 
-  console.log('>>> All passed!', times);
+  console.log(">>> All passed!", times);
 }
 
 validator(+process.argv[2], +process.argv[3]);

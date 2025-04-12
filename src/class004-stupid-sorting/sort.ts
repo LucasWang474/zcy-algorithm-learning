@@ -1,9 +1,9 @@
-import * as process from 'process';
-import { getRandomArray } from '@/utils/random';
-import { isEqualArray, swap } from '@/utils/array';
+import * as process from "process";
+import { getRandomArray } from "@/utils/random";
+import { isEqualArray, swap } from "@/utils/array";
 
 function bubbleSort(arr: number[]) {
-  console.log('>>> You are using bubbleSort');
+  console.log(">>> You are using bubbleSort");
   const N = arr.length;
   for (let i = N - 1; i >= 0; i--) {
     for (let j = 0; j < i; j++) {
@@ -15,7 +15,7 @@ function bubbleSort(arr: number[]) {
 }
 
 function insertionSort(arr: number[]) {
-  console.log('>>> You are using insertionSort');
+  console.log(">>> You are using insertionSort");
 
   const N = arr.length;
   for (let i = 0; i < N; i++) {
@@ -42,25 +42,25 @@ function main(method: string) {
   const actual = [...arr];
 
   switch (method) {
-    case 'bubble':
+    case "bubble":
       bubbleSort(actual);
       break;
-    case 'insert':
+    case "insert":
       insertionSort(actual);
       break;
-    case 'select':
+    case "select":
     default:
       selectionSort(actual);
       break;
   }
 
   if (!isEqualArray(expected, actual)) {
-    console.log('>>> expected', expected);
-    console.log('>>> actual', actual);
+    console.log(">>> expected", expected);
+    console.log(">>> actual", actual);
     return;
   }
 
-  console.log('>>> Successful sorting');
+  console.log(">>> Successful sorting");
 }
 
 main(process.argv[2]);

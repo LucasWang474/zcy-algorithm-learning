@@ -43,8 +43,8 @@ function validator(times = 100) {
     // }
   }
 
-  console.log('>>> res', res);
-  console.log('>>> All passed!');
+  console.log(">>> res", res);
+  console.log(">>> All passed!");
 }
 
 validator(+process.argv[2]);

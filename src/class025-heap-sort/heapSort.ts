@@ -1,7 +1,7 @@
-import { getRandomArray } from '@/utils/random';
-import { isEqualArray, swap } from '@/utils/array';
-import process from 'node:process';
-import { MyHeap } from '@/utils/heap';
+import { getRandomArray } from "@/utils/random";
+import { isEqualArray, swap } from "@/utils/array";
+import process from "node:process";
+import { MyHeap } from "@/utils/heap";
 
 function heapSort(arr: number[]) {
   // Step 1: build the heap
@@ -69,7 +69,7 @@ function validator(times = 100, arrSize = 10) {
     }
   }
 
-  console.log('>>> All passed!', times);
+  console.log(">>> All passed!", times);
 }
 
 validator(+process.argv[2], +process.argv[3]);

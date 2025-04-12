@@ -14,7 +14,7 @@ function numDecodingsBottomUp2(s: string): number {
   for (let i = s.length - 1; i >= 0; i--) {
     let cur = 0;
 
-    if (s[i] === '0') {
+    if (s[i] === "0") {
       [next, nextNext] = [cur, next];
       continue;
     }
@@ -35,7 +35,7 @@ function numDecodingsBottomUp(s: string): number {
   dp[s.length] = 1;
 
   for (let i = s.length - 1; i >= 0; i--) {
-    if (s[i] === '0') {
+    if (s[i] === "0") {
       dp[i] = 0;
       continue;
     }
@@ -63,7 +63,7 @@ function numDecodingsRecur(s: string, dp: number[], i: number): number {
     return 0;
   }
 
-  if (s[i] === '0') {
+  if (s[i] === "0") {
     dp[i] = 0;
     return 0;
   }
@@ -81,7 +81,7 @@ function validator() {
   let expected, actual, input;
 
   // Test 1
-  input = '12';
+  input = "12";
   expected = 2;
   actual = numDecodings(input);
   if (expected !== actual) {
@@ -90,7 +90,7 @@ function validator() {
   }
 
   // Test 2
-  input = '226';
+  input = "226";
   expected = 3;
   actual = numDecodings(input);
   if (expected !== actual) {
@@ -99,7 +99,7 @@ function validator() {
   }
 
   // Test 3
-  input = '06';
+  input = "06";
   expected = 0;
   actual = numDecodings(input);
   if (expected !== actual) {
@@ -107,7 +107,7 @@ function validator() {
     return;
   }
 
-  console.log('All test cases passed');
+  console.log("All test cases passed");
 }
 
 validator();

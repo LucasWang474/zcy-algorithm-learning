@@ -48,11 +48,11 @@ class AllOne {
   }
 
   getMaxKey(): string {
-    return this.countList.tail.prev?.stringSet.values().next().value || '';
+    return this.countList.tail.prev?.stringSet.values().next().value || "";
   }
 
   getMinKey(): string {
-    return this.countList.head.next?.stringSet.values().next().value || '';
+    return this.countList.head.next?.stringSet.values().next().value || "";
   }
 }
 
@@ -94,7 +94,7 @@ class CountList {
   }
 
   getMinusOneCountNode(node: CountNode): CountNode {
-    if (node === this.head) throw new Error('node can not be head');
+    if (node === this.head) throw new Error("node can not be head");
 
     if (node.prev?.count === node.count - 1) {
       return node.prev;
@@ -106,7 +106,7 @@ class CountList {
   }
 
   getPlusOneCountNode(node: CountNode): CountNode {
-    if (node === this.tail) throw new Error('node can not be tail');
+    if (node === this.tail) throw new Error("node can not be tail");
 
     if (node.next?.count === node.count + 1) {
       return node.next;
@@ -117,7 +117,7 @@ class CountList {
   }
 
   insertNodeToNext(newNode: CountNode, node: CountNode) {
-    if (node === this.tail) throw new Error('node can not be tail');
+    if (node === this.tail) throw new Error("node can not be tail");
 
     const next = node.next as CountNode;
 

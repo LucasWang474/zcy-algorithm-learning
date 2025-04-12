@@ -1,6 +1,6 @@
 // https://leetcode.com/problems/distinct-subsequences-ii/description/
 
-const BASE_CHARCODE = 'a'.charCodeAt(0);
+const BASE_CHARCODE = "a".charCodeAt(0);
 const MOD = 10 ** 9 + 7;
 
 function distinctSubseqII(s: string): number {

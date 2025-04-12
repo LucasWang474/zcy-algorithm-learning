@@ -1,8 +1,8 @@
 /**
  * Find the rightmost number which is less than or equals to the target.
  */
-import { getRandomArray } from '@/utils/random';
-import { sortNumsArrayInPlace } from '@/utils/array';
+import { getRandomArray } from "@/utils/random";
+import { sortNumsArrayInPlace } from "@/utils/array";
 
 function bf(nums: number[], target: number) {
   for (let i = nums.length - 1; i >= 0; i--) {
@@ -49,7 +49,7 @@ function validator() {
       return;
     }
   }
-  console.log('All passed');
+  console.log("All passed");
 }
 
 validator();

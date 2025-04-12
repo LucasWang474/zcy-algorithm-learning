@@ -1,5 +1,5 @@
-import { getRandomInteger } from '@/utils/random';
-import process from 'node:process';
+import { getRandomInteger } from "@/utils/random";
+import process from "node:process";
 
 const MAX_BITS = 32;
 
@@ -57,7 +57,7 @@ function validator(times = 100) {
     }
   }
 
-  console.log('>>> Result hashSet', hashSet);
+  console.log(">>> Result hashSet", hashSet);
   for (const num of hashSet) {
     if (!bitSet.contains(num)) {
       console.error(num, hashSet, bitSet);
@@ -65,7 +65,7 @@ function validator(times = 100) {
     }
   }
 
-  console.log('>> All passed!', times);
+  console.log(">> All passed!", times);
 }
 
 validator(+process.argv[2]);

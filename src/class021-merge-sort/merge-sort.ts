@@ -1,6 +1,6 @@
-import { getRandomArray } from '@/utils/random';
-import { isEqualArray } from '@/utils/array';
-import * as process from 'node:process';
+import { getRandomArray } from "@/utils/random";
+import { isEqualArray } from "@/utils/array";
+import * as process from "node:process";
 
 function mergeSort(arr: number[]) {
   const helper = new Array(arr.length);
@@ -62,7 +62,7 @@ function validator(times = 100) {
     }
   }
 
-  console.log('>>> All passed!', times);
+  console.log(">>> All passed!", times);
 }
 
 validator(+process.argv[2]);

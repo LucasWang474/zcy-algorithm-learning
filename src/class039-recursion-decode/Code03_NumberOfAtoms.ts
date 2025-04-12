@@ -7,16 +7,16 @@ function countOfAtoms(formula: string): string {
   return [...map.entries()]
     .sort()
     .map(([key, val]) => {
-      return key + (val === 1 ? '' : String(val));
+      return key + (val === 1 ? "" : String(val));
     })
-    .join('');
+    .join("");
 }
 
 function countOfAtomsRecur(formula: string, info: { i: number }, map: Map<string, number>) {
   if (info.i >= formula.length) return;
 
   let mapForRecur: Map<string, number> | undefined;
-  let curEle = '';
+  let curEle = "";
   let times: undefined | number = undefined;
 
   function updateMap() {
@@ -27,21 +27,21 @@ function countOfAtomsRecur(formula: string, info: { i: number }, map: Map<string
         map.set(key, (map.get(key) || 0) + value * (times || 1));
       }
     }
-		
+
     mapForRecur = undefined;
-    curEle = '';
+    curEle = "";
     times = undefined;
   }
 
   while (info.i < formula.length) {
     const char = formula[info.i++];
 
-    if (char >= '0' && char <= '9') {
+    if (char >= "0" && char <= "9") {
       times = times === undefined ? Number(char) : times * 10 + Number(char);
       continue;
     }
 
-    if (char === '(') {
+    if (char === "(") {
       updateMap();
 
       mapForRecur = new Map<string, number>();
@@ -49,7 +49,7 @@ function countOfAtomsRecur(formula: string, info: { i: number }, map: Map<string
       continue;
     }
 
-    if (char === ')') {
+    if (char === ")") {
       break;
     }
 
@@ -66,8 +66,8 @@ function countOfAtomsRecur(formula: string, info: { i: number }, map: Map<string
 function validator() {
   let expected, actual, input;
 
-  input = 'H2O';
-  expected = 'H2O';
+  input = "H2O";
+  expected = "H2O";
   actual = countOfAtoms(input);
   if (expected !== actual) {
     console.error(`Expected: ${expected}, actual: ${actual}, input: ${input}`);
@@ -75,8 +75,8 @@ function validator() {
   }
 
   // Test 2
-  input = 'Mg(OH)2';
-  expected = 'H2MgO2';
+  input = "Mg(OH)2";
+  expected = "H2MgO2";
   actual = countOfAtoms(input);
   if (expected !== actual) {
     console.error(`Expected: ${expected}, actual: ${actual}, input: ${input}`);
@@ -84,15 +84,15 @@ function validator() {
   }
 
   // Test 3
-  input = 'K4(ON(SO3)2)2';
-  expected = 'K4N2O14S4';
+  input = "K4(ON(SO3)2)2";
+  expected = "K4N2O14S4";
   actual = countOfAtoms(input);
   if (expected !== actual) {
     console.error(`Expected: ${expected}, actual: ${actual}, input: ${input}`);
     return;
   }
 
-  console.log('All test cases passed');
+  console.log("All test cases passed");
 }
 
 validator();

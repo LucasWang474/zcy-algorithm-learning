@@ -1,7 +1,7 @@
-import { getRandomLinkedList } from '@/utils/random';
-import { isEqualArray } from '@/utils/array';
-import * as process from 'node:process';
-import { MyListNode } from '@/utils/linked-list';
+import { getRandomLinkedList } from "@/utils/random";
+import { isEqualArray } from "@/utils/array";
+import * as process from "node:process";
+import { MyListNode } from "@/utils/linked-list";
 
 function reverseList<T>(node: MyListNode<T> | null) {
   if (!node) return null;
@@ -46,7 +46,7 @@ function validator(times = 100) {
     }
   }
 
-  console.log('All passed!', times);
+  console.log("All passed!", times);
 }
 
 validator(+process.argv[2] || 100);

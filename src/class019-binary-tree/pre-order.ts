@@ -1,4 +1,4 @@
-import { TreeNode } from '@/utils/linked-list';
+import { TreeNode } from "@/utils/linked-list";
 
 // https://leetcode.com/problems/binary-tree-preorder-traversal/description/
 function preorderTraversal(root: TreeNode | null): number[] {

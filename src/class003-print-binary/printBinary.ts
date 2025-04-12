@@ -1,11 +1,11 @@
-import * as process from 'process';
+import * as process from "process";
 
 function printBinary(num: number, bits = 32) {
-  let res = '';
+  let res = "";
   for (let i = bits - 1; i >= 0; i--) {
-    res += ((1 << i) & num) === 0 ? '0' : '1';
+    res += ((1 << i) & num) === 0 ? "0" : "1";
   }
-  console.log('>>> res', res);
+  console.log(">>> res", res);
 }
 
 const num = +process.argv[2] || 0;

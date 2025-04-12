@@ -13,19 +13,19 @@ class TreeNode {
 }
 
 function serialize(root: TreeNode | null): string {
-  if (!root) return 'null';
+  if (!root) return "null";
 
   return `${root.val},${serialize(root.left)},${serialize(root.right)}`;
 }
 
 function deserialize(data: string): TreeNode | null {
-  return deserializeRecur(data.split(','), { idx: 0 });
+  return deserializeRecur(data.split(","), { idx: 0 });
 }
 
 function deserializeRecur(nodes: string[], idxInfo: { idx: number }) {
   const cur = nodes[idxInfo.idx++];
 
-  if (cur === 'null') return null;
+  if (cur === "null") return null;
 
   const head = new TreeNode(+cur);
   head.left = deserializeRecur(nodes, idxInfo);
@@ -37,5 +37,5 @@ function deserializeRecur(nodes: string[], idxInfo: { idx: number }) {
 const res = serialize(new TreeNode(1, new TreeNode(2), new TreeNode(3, new TreeNode(4))));
 const res2 = deserialize(res);
 // 1,2,null,null,3,4,null,null,null
-console.log('>>> res', res);
-console.log('>>> res2', res2);
+console.log(">>> res", res);
+console.log(">>> res2", res2);

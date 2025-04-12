@@ -14,32 +14,32 @@ function numDecodingsBottomUp2(s: string): number {
 
   for (let i = s.length - 1; i >= 0; i--) {
     const curChar = s[i];
-    if (curChar === '0') {
+    if (curChar === "0") {
       [nextCount, nextNextCount] = [0, nextCount];
       continue;
     }
 
-    let curCount = curChar === '*' ? 9 * nextCount : nextCount;
+    let curCount = curChar === "*" ? 9 * nextCount : nextCount;
 
     if (i + 1 < s.length) {
       const nextChar = s[i + 1];
 
-      if (nextChar === '*') {
+      if (nextChar === "*") {
         curCount +=
           // 11-19
-          curChar === '1'
+          curChar === "1"
             ? 9 * nextNextCount
             : // 21-26
-            curChar === '2'
+            curChar === "2"
             ? 6 * nextNextCount
             : // 11-19, 21-26
-            curChar === '*'
+            curChar === "*"
             ? 15 * nextNextCount
             : 0;
       } else {
         // nextChar: 0-9
         curCount +=
-          curChar === '*'
+          curChar === "*"
             ? // 1*, 2*
               (+nextChar > 6 ? 1 : 2) * nextNextCount
             : +curChar * 10 + +nextChar <= UPPER
@@ -60,31 +60,31 @@ function numDecodingsBottomUp(s: string): number {
 
   for (let i = s.length - 1; i >= 0; i--) {
     const curChar = s[i];
-    if (curChar === '0') continue;
+    if (curChar === "0") continue;
 
     const nextCount = dp[i + 1];
-    let curCount = curChar === '*' ? 9 * nextCount : nextCount;
+    let curCount = curChar === "*" ? 9 * nextCount : nextCount;
 
     if (i + 1 < s.length) {
       const nextChar = s[i + 1];
       const nextNextCount = dp[i + 2];
 
-      if (nextChar === '*') {
+      if (nextChar === "*") {
         curCount +=
           // 11-19
-          curChar === '1'
+          curChar === "1"
             ? 9 * nextNextCount
             : // 21-26
-            curChar === '2'
+            curChar === "2"
             ? 6 * nextNextCount
             : // 11-19, 21-26
-            curChar === '*'
+            curChar === "*"
             ? 15 * nextNextCount
             : 0;
       } else {
         // nextChar: 0-9
         curCount +=
-          curChar === '*'
+          curChar === "*"
             ? // 1*, 2*
               (+nextChar > 6 ? 1 : 2) * nextNextCount
             : +curChar * 10 + +nextChar <= UPPER
@@ -106,7 +106,7 @@ function numDecodingsRecur(s: string, dp: number[], i: number): number {
   const curChar = s[i];
 
   if (i === s.length - 1) {
-    if (curChar === '*') {
+    if (curChar === "*") {
       dp[i] = 9;
     } else if (+s[i] >= LOWER && +s[i] <= UPPER) {
       dp[i] = 1;
@@ -117,33 +117,33 @@ function numDecodingsRecur(s: string, dp: number[], i: number): number {
     return dp[i];
   }
 
-  if (curChar === '0') {
+  if (curChar === "0") {
     dp[i] = 0;
     return 0;
   }
 
   const next = numDecodingsRecur(s, dp, i + 1);
-  let count = curChar === '*' ? 9 * next : next;
+  let count = curChar === "*" ? 9 * next : next;
   if (i + 1 < s.length) {
     const nextChar = s[i + 1];
     const nextNext = numDecodingsRecur(s, dp, i + 2);
 
-    if (nextChar === '*') {
+    if (nextChar === "*") {
       count +=
         // 11-19
-        curChar === '1'
+        curChar === "1"
           ? 9 * nextNext
           : // 21-26
-          curChar === '2'
+          curChar === "2"
           ? 6 * nextNext
           : // 11-19, 21-26
-          curChar === '*'
+          curChar === "*"
           ? 15 * nextNext
           : 0;
     } else {
       // nextChar: 0-9
       count +=
-        curChar === '*'
+        curChar === "*"
           ? // 1*, 2*
             (+nextChar > 6 ? 1 : 2) * nextNext
           : +curChar * 10 + +nextChar <= UPPER
@@ -167,7 +167,7 @@ function validator() {
   //   return;
   // }
 
-  input = '1*';
+  input = "1*";
   expected = 18;
   actual = numDecodings(input);
   if (expected !== actual) {
@@ -175,7 +175,7 @@ function validator() {
     return;
   }
 
-  input = '2*';
+  input = "2*";
   expected = 15;
   actual = numDecodings(input);
   if (expected !== actual) {
@@ -183,7 +183,7 @@ function validator() {
     return;
   }
 
-  input = '**';
+  input = "**";
   expected = 96;
   actual = numDecodings(input);
   if (expected !== actual) {
@@ -191,7 +191,7 @@ function validator() {
     return;
   }
 
-  input = '*1';
+  input = "*1";
   expected = 11;
   actual = numDecodings(input);
   if (expected !== actual) {
@@ -199,7 +199,7 @@ function validator() {
     return;
   }
 
-  input = '1*72*';
+  input = "1*72*";
   expected = 285;
   actual = numDecodings(input);
   if (expected !== actual) {
@@ -207,7 +207,7 @@ function validator() {
     return;
   }
 
-  input = '*********';
+  input = "*********";
   expected = 291868912;
   actual = numDecodings(input);
   if (expected !== actual) {
@@ -216,7 +216,7 @@ function validator() {
   }
 
   input =
-    '1*6*7*1*9*6*2*9*2*3*3*6*3*2*2*4*7*2*9*6*0*6*4*4*1*6*9*0*5*9*2*5*7*7*0*6*9*7*1*5*5*9*3*0*4*9*2*6*2*5*7*6*1*9*4*5*8*4*7*4*2*7*1*2*1*9*1*3*0*6*';
+    "1*6*7*1*9*6*2*9*2*3*3*6*3*2*2*4*7*2*9*6*0*6*4*4*1*6*9*0*5*9*2*5*7*7*0*6*9*7*1*5*5*9*3*0*4*9*2*6*2*5*7*6*1*9*4*5*8*4*7*4*2*7*1*2*1*9*1*3*0*6*";
   expected = 882201566;
   actual = numDecodings(input);
   if (expected !== actual) {
@@ -224,7 +224,7 @@ function validator() {
     return;
   }
 
-  console.log('All test cases passed');
+  console.log("All test cases passed");
 }
 
 validator();

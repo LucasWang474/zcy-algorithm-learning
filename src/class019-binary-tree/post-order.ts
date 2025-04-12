@@ -1,4 +1,4 @@
-import { TreeNode } from '@/utils/linked-list';
+import { TreeNode } from "@/utils/linked-list";
 
 function postorderTraversal(root: TreeNode | null): number[] {
   if (!root) return [];
@@ -8,7 +8,7 @@ function postorderTraversal(root: TreeNode | null): number[] {
 
   while (stack.length) {
     const head = stack.pop();
-    if (typeof head === 'number') {
+    if (typeof head === "number") {
       res.push(head);
     } else if (head) {
       stack.push(head.val);

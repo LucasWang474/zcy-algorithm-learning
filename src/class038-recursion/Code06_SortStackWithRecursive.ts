@@ -1,5 +1,5 @@
-import { getRandomArray } from '../utils/random';
-import { isEqualArray } from '../utils/array';
+import { getRandomArray } from "../utils/random";
+import { isEqualArray } from "../utils/array";
 
 function sortStack(nums: number[]): number[] {
   if (nums.length <= 1) return nums;
@@ -38,7 +38,7 @@ function validatorSortStack(times = 100, arrSize = 10) {
     }
   }
 
-  console.log('>>> Validate sortStack. All passed!', times);
+  console.log(">>> Validate sortStack. All passed!", times);
 }
 
 validatorSortStack(+process.argv[2], +process.argv[3]);
@@ -51,16 +51,16 @@ function validatorExtractMax(times = 1000) {
     const arrCopy = inputArr.slice();
     const actualMax = extractMax(arrCopy);
     if (actualMax !== expectedMax) {
-      console.error('Max not right', expectedMax, actualMax, inputArr);
+      console.error("Max not right", expectedMax, actualMax, inputArr);
       return;
     }
     if (arrCopy.length !== inputArr.length - 1) {
-      console.error('Arr size not right', inputArr, arrCopy);
+      console.error("Arr size not right", inputArr, arrCopy);
       return;
     }
   }
 
-  console.log('>>> Validate extractMax. All passed!', times);
+  console.log(">>> Validate extractMax. All passed!", times);
 }
 
 validatorExtractMax();

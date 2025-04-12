@@ -1,8 +1,8 @@
 /**
  * Find a local max element in the number array
  */
-import { getRandomInteger } from '@/utils/random';
-import * as process from 'node:process';
+import { getRandomInteger } from "@/utils/random";
+import * as process from "node:process";
 
 function generateRandomArray(arraySize = 100, maxNum = 100) {
   const arr: number[] = [];
@@ -65,8 +65,8 @@ function validator(times = 100) {
     }
   }
   const end = performance.now();
-  console.log('>>> end - start', end - start);
-  console.log('All passed');
+  console.log(">>> end - start", end - start);
+  console.log("All passed");
 }
 
 validator(+process.argv[2]);

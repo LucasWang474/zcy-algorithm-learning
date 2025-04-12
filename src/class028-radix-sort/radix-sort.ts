@@ -1,8 +1,8 @@
 // https://leetcode.com/problems/sort-an-array/
 
-import { getRandomArray } from '@/utils/random';
-import { isEqualArray } from '@/utils/array';
-import process from 'node:process';
+import { getRandomArray } from "@/utils/random";
+import { isEqualArray } from "@/utils/array";
+import process from "node:process";
 
 function sortArray(nums: number[]): number[] {
   return radixSort(nums);
@@ -67,7 +67,7 @@ function validator(times = 100, arrSize = 10) {
     }
   }
 
-  console.log('>>> All passed!', times);
+  console.log(">>> All passed!", times);
 }
 
 validator(+process.argv[2], +process.argv[3]);

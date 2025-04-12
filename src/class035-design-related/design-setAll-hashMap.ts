@@ -1,5 +1,5 @@
 // https://www.nowcoder.com/practice/7c4559f138e74ceb9ba57d76fd169967
-const readline = require('readline');
+const readline = require("readline");
 
 class ImprovedMap {
   private readonly map = new Map<number, [number, number]>();
@@ -30,21 +30,21 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
-rl.on('line', function (line: string) {
+rl.on("line", function (line: string) {
   if (N === undefined) {
     N = line;
     return;
   }
 
-  const [operation, ...args] = line.split(' ');
+  const [operation, ...args] = line.split(" ");
   switch (operation) {
-    case '1':
+    case "1":
       map.set(+args[0], +args[1]);
       return;
-    case '2':
+    case "2":
       console.log(map.get(+args[0]));
       return;
-    case '3':
+    case "3":
       map.setAll(+args[0]);
       return;
   }

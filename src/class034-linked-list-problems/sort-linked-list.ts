@@ -15,7 +15,7 @@ function sortList(head: ListNode | null): ListNode | null {
 
   for (let step = 1; step < N; step <<= 1) {
     let l1 = head;
-    if (!l1) throw new Error('l1 should not be null');
+    if (!l1) throw new Error("l1 should not be null");
     let r1 = getEndByK(l1, step);
 
     let l2 = r1.next;
@@ -57,7 +57,7 @@ function sortList(head: ListNode | null): ListNode | null {
 }
 
 function merge(l1: ListNode | null, r1: ListNode | null, l2: ListNode | null, r2: ListNode | null) {
-  if (!l1 || !l2 || !r1 || !r2) throw new Error('invalid input');
+  if (!l1 || !l2 || !r1 || !r2) throw new Error("invalid input");
   let start: ListNode,
     end: ListNode = r2,
     pre: ListNode;

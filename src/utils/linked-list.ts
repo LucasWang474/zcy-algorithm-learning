@@ -24,7 +24,7 @@ export class MyListNode<T> {
 
     let head = this.next;
     while (head) {
-      res += '->' + head.val;
+      res += "->" + head.val;
       head = head.next;
     }
 
@@ -83,11 +83,11 @@ export function arrToTree(arr: (null | undefined | number)[]) {
     // left child
     const leftIdx = index * 2 + 1,
       rightIdx = index * 2 + 2;
-    if (typeof arr[leftIdx] === 'number') {
+    if (typeof arr[leftIdx] === "number") {
       head.left = new TreeNode(arr[leftIdx] as number);
       stack.push([head.left, leftIdx]);
     }
-    if (typeof arr[rightIdx] === 'number') {
+    if (typeof arr[rightIdx] === "number") {
       head.right = new TreeNode(arr[rightIdx] as number);
       stack.push([head.right, rightIdx]);
     }

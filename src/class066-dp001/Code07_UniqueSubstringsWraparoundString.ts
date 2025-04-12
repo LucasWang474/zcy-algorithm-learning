@@ -22,5 +22,5 @@ function findSubstringInWraproundString(s: string): number {
 }
 
 function getChatCodeIdx(s: string) {
-  return s.charCodeAt(0) - 'a'.charCodeAt(0);
+  return s.charCodeAt(0) - "a".charCodeAt(0);
 }

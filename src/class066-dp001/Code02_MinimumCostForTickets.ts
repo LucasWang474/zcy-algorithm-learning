@@ -86,7 +86,7 @@ function validator() {
     return;
   }
 
-  console.log('>>> All passed!');
+  console.log(">>> All passed!");
 }
 
 validator();

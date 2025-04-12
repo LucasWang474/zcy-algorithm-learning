@@ -1,6 +1,6 @@
-import { getRandomArray } from '@/utils/random';
-import { isEqualArray, swap } from '@/utils/array';
-import process from 'node:process';
+import { getRandomArray } from "@/utils/random";
+import { isEqualArray, swap } from "@/utils/array";
+import process from "node:process";
 
 function quickSort(arr: number[]) {
   quickSortRecur(arr, 0, arr.length - 1);
@@ -51,7 +51,7 @@ function validator(times = 100, arrSize = 10) {
     }
   }
 
-  console.log('>>> All passed!', times);
+  console.log(">>> All passed!", times);
 }
 
 validator(+process.argv[2], +process.argv[3]);

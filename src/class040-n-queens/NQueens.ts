@@ -41,7 +41,7 @@ function solveNQueens(n: number, row = 0, queens: [number, number][] = [], res: 
 }
 
 function getRowString(col: number, n: number) {
-  return '.'.repeat(Math.max(0, col)) + 'Q' + '.'.repeat(n - col - 1);
+  return ".".repeat(Math.max(0, col)) + "Q" + ".".repeat(n - col - 1);
 }
 
 function isValidPosition(cur: [number, number], taken: [number, number][]) {
@@ -81,7 +81,7 @@ function testTotalNQueens() {
     return;
   }
 
-  console.log('All test cases passed');
+  console.log("All test cases passed");
 }
 
 testTotalNQueens();

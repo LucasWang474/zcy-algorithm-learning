@@ -12,7 +12,7 @@ class TreeNode {
 
 // level-order
 function serialize(root: TreeNode | null): string {
-  if (!root) return 'null';
+  if (!root) return "null";
 
   let curLevel = [root],
     nextLevel;
@@ -35,9 +35,9 @@ function serialize(root: TreeNode | null): string {
 }
 
 function deserialize(data: string): TreeNode | null {
-  if (!data || data === 'null') return null;
+  if (!data || data === "null") return null;
 
-  const vals = data.split(',');
+  const vals = data.split(",");
   let i = 0;
   const root = new TreeNode(+vals[i++]);
 
@@ -61,15 +61,15 @@ function deserialize(data: string): TreeNode | null {
 }
 
 function generateStrFromNode(node: TreeNode | null) {
-  return node ? String(node.val) : 'null';
+  return node ? String(node.val) : "null";
 }
 
 function generateNodeFromStr(s: string) {
-  return s === 'null' ? null : new TreeNode(+s);
+  return s === "null" ? null : new TreeNode(+s);
 }
 
 const res1 = serialize(new TreeNode(1, new TreeNode(2), new TreeNode(3, new TreeNode(4))));
 const res2 = deserialize(res1);
 // res 1,2,3,null,null,4,null,null,null
-console.log('>>> res', res1);
-console.log('>>> res2', res2);
+console.log(">>> res", res1);
+console.log(">>> res2", res2);

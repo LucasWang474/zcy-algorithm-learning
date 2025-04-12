@@ -30,4 +30,4 @@ function swap<T>(arr: T[], i: number, j: number) {
 }
 
 const res1 = permute([1, 2, 3]);
-console.log('>>> res1', res1);
+console.log(">>> res1", res1);

@@ -1,6 +1,6 @@
 // https://leetcode.com/problems/design-bitset/
-import { getRandomInteger } from '@/utils/random';
-import process from 'node:process';
+import { getRandomInteger } from "@/utils/random";
+import process from "node:process";
 
 class Bitset {
   public readonly bitSet: number[] = [];
@@ -90,7 +90,7 @@ class Bitset {
   }
 
   toString(): string {
-    let res = '';
+    let res = "";
 
     for (let num = 0; num < this.maxBits; num++) {
       const i = Math.trunc(num / 32);
@@ -98,9 +98,9 @@ class Bitset {
 
       const val = this.bitSet[i] & (1 << count);
       if (val === 0) {
-        res += this.reversed ? '1' : '0';
+        res += this.reversed ? "1" : "0";
       } else {
-        res += this.reversed ? '0' : '1';
+        res += this.reversed ? "0" : "1";
       }
     }
     return res;
@@ -159,7 +159,7 @@ function validator(times = 10000) {
     const hashSetAll = [...hashSet].sort((a, b) => a - b).length === bits;
     const bitSetAll = bitSet.all();
     if (hashSetAll !== bitSetAll) {
-      console.error('all', hashSetAll, bitSetAll, hashSet, bitSet);
+      console.error("all", hashSetAll, bitSetAll, hashSet, bitSet);
       return;
     }
 
@@ -167,7 +167,7 @@ function validator(times = 10000) {
     const hashSetOne = hashSet.size > 0;
     const bitSetOne = bitSet.one();
     if (hashSetOne !== bitSetOne) {
-      console.error('one', hashSetOne, bitSetOne, hashSet, bitSet);
+      console.error("one", hashSetOne, bitSetOne, hashSet, bitSet);
       return;
     }
 
@@ -175,7 +175,7 @@ function validator(times = 10000) {
     const hashSetCount = hashSet.size;
     const bitSetCount = bitSet.count();
     if (hashSetCount !== bitSetCount) {
-      console.error('count', hashSetCount, bitSetCount, hashSet, bitSet);
+      console.error("count", hashSetCount, bitSetCount, hashSet, bitSet);
       return;
     }
 
@@ -183,23 +183,23 @@ function validator(times = 10000) {
     const expected = new Array(bits)
       .fill(0)
       .map((_, index) => {
-        return hashSet.has(index) ? '1' : '0';
+        return hashSet.has(index) ? "1" : "0";
       })
-      .join('');
+      .join("");
     const actual = bitSet.toString();
     if (expected !== actual) {
-      console.log('>>> bits', bits);
-      console.error('toString');
-      console.error('expected', expected);
-      console.error('actual', actual);
+      console.log(">>> bits", bits);
+      console.error("toString");
+      console.error("expected", expected);
+      console.error("actual", actual);
       console.error(hashSet, bitSet.bitSet);
 
-      console.log('>>>>>>');
+      console.log(">>>>>>");
       return;
     }
   }
 
-  console.log('>> All passed!', times);
+  console.log(">> All passed!", times);
 }
 
 validator(+process.argv[2]);

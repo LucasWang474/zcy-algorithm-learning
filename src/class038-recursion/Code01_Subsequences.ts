@@ -6,7 +6,7 @@
  * @return string字符串一维数组
  */
 export function generatePermutation(s: string): string[] {
-  if (!s) return [''];
+  if (!s) return [""];
 
   const strSet = new Set<string>();
   generatePermutationRecur(s, 0, [], strSet);
@@ -32,19 +32,19 @@ function generatePermutationRecur(s: string, idx: number, path: string[], strSet
 }
 
 function getStrFromPath(path: string[]) {
-  return path.reduce((prev, cur) => prev + cur, '');
+  return path.reduce((prev, cur) => prev + cur, "");
 }
 
-const res1 = generatePermutation('ab');
-console.log('>>> res1', res1.length === ['', 'a', 'ab', 'b'].length);
-const res2 = generatePermutation('dbcq');
+const res1 = generatePermutation("ab");
+console.log(">>> res1", res1.length === ["", "a", "ab", "b"].length);
+const res2 = generatePermutation("dbcq");
 console.log(
-  '>>> res2',
+  ">>> res2",
   res2.length ===
-    ['', 'b', 'bc', 'bcq', 'bq', 'c', 'cq', 'd', 'db', 'dbc', 'dbcq', 'dbq', 'dc', 'dcq', 'dq', 'q']
+    ["", "b", "bc", "bcq", "bq", "c", "cq", "d", "db", "dbc", "dbcq", "dbq", "dc", "dcq", "dq", "q"]
       .length,
 );
-const res3 = generatePermutation('aab');
-console.log('>>> res3', res3.length === ['', 'a', 'aa', 'aab', 'ab', 'b'].length);
-const res4 = generatePermutation('dasdbhkuhoijaklsdja');
-console.log('>>> res4.length', res4.length);
+const res3 = generatePermutation("aab");
+console.log(">>> res3", res3.length === ["", "a", "aa", "aab", "ab", "b"].length);
+const res4 = generatePermutation("dasdbhkuhoijaklsdja");
+console.log(">>> res4.length", res4.length);

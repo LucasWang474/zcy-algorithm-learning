@@ -9,14 +9,14 @@ function longestValidParentheses(s: string): number {
 
   for (let i = 1; i < s.length; i++) {
     const curChar = s[i];
-    if (curChar === '(') continue;
+    if (curChar === "(") continue;
 
     // Otherwise, it's a ")"
     const leftLength = dp[i - 1];
     const leftIdx = i - leftLength - 1;
     const leftChar = s[leftIdx];
 
-    if (leftChar === '(') {
+    if (leftChar === "(") {
       dp[i] = leftLength + 2 + (dp[leftIdx - 1] || 0);
       max = Math.max(dp[i], max);
     }
@@ -29,7 +29,7 @@ function validator() {
   let expected, actual, input;
 
   // Test 1
-  input = '(()';
+  input = "(()";
   expected = 2;
   actual = longestValidParentheses(input);
   if (expected !== actual) {
@@ -38,7 +38,7 @@ function validator() {
   }
 
   // Test 2
-  input = ')()())';
+  input = ")()())";
   expected = 4;
   actual = longestValidParentheses(input);
   if (expected !== actual) {
@@ -47,7 +47,7 @@ function validator() {
   }
 
   // Test 3
-  input = '';
+  input = "";
   expected = 0;
   actual = longestValidParentheses(input);
   if (expected !== actual) {
@@ -56,7 +56,7 @@ function validator() {
   }
 
   // Test 4
-  input = '()(()';
+  input = "()(()";
   expected = 2;
   actual = longestValidParentheses(input);
   if (expected !== actual) {
@@ -65,7 +65,7 @@ function validator() {
   }
 
   // Test 5
-  input = '(()()';
+  input = "(()()";
   expected = 4;
   actual = longestValidParentheses(input);
   if (expected !== actual) {
@@ -73,7 +73,7 @@ function validator() {
     return;
   }
 
-  console.log('All test cases passed');
+  console.log("All test cases passed");
 }
 
 validator();
