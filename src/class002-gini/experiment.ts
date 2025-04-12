@@ -8,8 +8,6 @@
 // 如果某个人在这一轮的钱数为0，那么他可以不给，但是可以接收
 // 发生很多很多轮之后，这100人的社会财富分布很均匀吗？
 
-// Test
-
 import * as process from "process";
 
 const INITIAL_WEALTH_PER_PERSON = 100;
